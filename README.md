@@ -1,4 +1,4 @@
-This is a Next.js project for FlashSend CDMX.
+This is a Next.js project for Pa$e A Gol CDMX.
 
 ## Getting Started
 
@@ -32,7 +32,7 @@ npm run build && npm start
 ```
 
 ## Publish to GitHub
-From project root (`flashsend-cdmx/`):
+From project root (`pa$e-a-gol-cdmx/`):
 ```
 git init
 git add .
@@ -40,14 +40,14 @@ git commit -m "chore: initial commit"
 ```
 Then create a repo on GitHub and push:
 ```
-git remote add origin https://github.com/<your-user>/flashsend-cdmx.git
+git remote add origin https://github.com/<your-user>/pa$e-a-gol-cdmx.git
 git branch -M main
 git push -u origin main
 ```
 
 If you use GitHub CLI:
 ```
-gh repo create flashsend-cdmx --public --source=. --push
+gh repo create pa$e-a-gol-cdmx --public --source=. --push
 ```
 
 ## CI (optional)

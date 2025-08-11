@@ -7,7 +7,7 @@ import Providers from './providers'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'FlashSend CDMX - Mundial 2026 Ready',
+  title: 'Pa$e A Gol CDMX - Mundial 2026 Ready',
   description: 'Envía dinero instantáneamente a cualquier usuario de Farcaster',
 }
 

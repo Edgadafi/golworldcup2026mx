@@ -1,67 +1,182 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Variables CSS custom para colores */
+  --soccer-green: #22c55e;
+  --soccer-green-dark: #16a34a;
+  --mexican-green: #006847;
+  --mexican-red: #ce1126;
+  --worldcup-gold: #ffd700;
+  --worldcup-silver: #c0c0c0;
+  --worldcup-bronze: #cd7f32;
+  
+  /* Variables para gradientes */
+  --gradient-soccer: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  --gradient-mexican: linear-gradient(135deg, #006847 0%, #ce1126 100%);
+  --gradient-worldcup: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  
+  /* Variables para sombras */
+  --shadow-soccer: 0 10px 25px -3px rgba(34, 197, 94, 0.3);
+  --shadow-mexican: 0 10px 25px -3px rgba(0, 104, 71, 0.3);
+  --shadow-worldcup: 0 20px 40px -12px rgba(255, 215, 0, 0.4);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dbeafe 50%, #f0fdf4 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
 }
 
-html { scroll-behavior: smooth; }
-
-/* Landing helpers */
-.gradient-bg {
-  background: linear-gradient(135deg, #00C851 0%, #FF6B35 30%, #1DA1F2 70%, #6C5CE7 100%);
+/* Reset básico */
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-.glass-card {
-  backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
 }
 
-.glow-effect {
-  box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
+input, textarea {
+  font-family: inherit;
 }
 
-.pulse-animation {
-  animation: pulse 2s infinite;
+/* Estilos custom para componentes */
+.soccer-gradient {
+  background: var(--gradient-soccer);
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+.mexican-gradient {
+  background: var(--gradient-mexican);
 }
 
-.float-animation {
-  animation: float 3s ease-in-out infinite;
+.worldcup-gradient {
+  background: var(--gradient-worldcup);
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+/* Efectos de hover personalizados */
+.hover-lift {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-.hover-lift { transition: all 0.3s ease; }
 .hover-lift:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soccer);
+}
+
+/* Animaciones personalizadas */
+@keyframes celebration {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes money-float {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px) scale(1.1);
+    opacity: 0;
+  }
+}
+
+.celebration-animation {
+  animation: celebration 3s ease-out;
+}
+
+.money-float-animation {
+  animation: money-float 2s ease-out;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--soccer-green);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--soccer-green-dark);
+}
+
+/* Focus states para accesibilidad */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--soccer-green);
+  outline-offset: 2px;
+}
+
+/* Selección de texto personalizada */
+::selection {
+  background-color: var(--soccer-green);
+  color: white;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  
+  .mobile-padding {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Estilos para modo oscuro (futuro) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --soccer-green: #4ade80;
+    --soccer-green-dark: #22c55e;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    color: #f8fafc;
+  }
 }
