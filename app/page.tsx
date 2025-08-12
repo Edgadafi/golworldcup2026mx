@@ -198,33 +198,75 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="text-2xl font-bold text-gray-800 mb-6 text-center"
+            className="text-3xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent mb-8 text-center"
           >
             🚀 Acciones Rápidas
           </motion.h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: '🚀', title: 'Pa$e Rápido', description: 'Transferencia instantánea' },
-              { icon: '👥', title: 'Pa$e Grupal', description: 'Enviar a múltiples usuarios' },
-              { icon: '🎁', title: 'Propina', description: 'Dar propina fácilmente' },
-              { icon: '📊', title: 'Mercado', description: 'Predicciones deportivas' }
+              { 
+                icon: '🚀', 
+                title: 'Pa$e Rápido', 
+                description: 'Transferencia instantánea',
+                gradient: 'from-green-400 to-emerald-500',
+                hoverGradient: 'from-green-500 to-emerald-600'
+              },
+              { 
+                icon: '👥', 
+                title: 'Pa$e Grupal', 
+                description: 'Enviar a múltiples usuarios',
+                gradient: 'from-blue-400 to-cyan-500',
+                hoverGradient: 'from-blue-500 to-cyan-600'
+              },
+              { 
+                icon: '🎁', 
+                title: 'Propina', 
+                description: 'Dar propina fácilmente',
+                gradient: 'from-purple-400 to-pink-500',
+                hoverGradient: 'from-purple-500 to-pink-600'
+              },
+              { 
+                icon: '📊', 
+                title: 'Mercado', 
+                description: 'Predicciones deportivas',
+                gradient: 'from-orange-400 to-red-500',
+                hoverGradient: 'from-orange-500 to-red-600'
+              }
             ].map((action, index) => (
               <motion.div
                 key={action.title}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 + index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
+                className="group"
               >
                 <Card 
-                  className="p-6 text-center cursor-pointer hover:shadow-lg transition-all duration-300 bg-white border-2 border-green-200 hover:border-green-400"
+                  className="p-8 text-center cursor-pointer transition-all duration-300 bg-white border-0 shadow-lg hover:shadow-2xl overflow-hidden relative"
                   onClick={() => handleQuickAction(action.title)}
                 >
-                  <div className="text-4xl mb-4">{action.icon}</div>
-                  <h4 className="text-xl font-bold text-gray-800 mb-2">{action.title}</h4>
-                  <p className="text-gray-600">{action.description}</p>
+                  {/* Background gradient overlay */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${action.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+                  
+                  {/* Icon with background */}
+                  <div className={`relative z-10 w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br ${action.gradient} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300`}>
+                    <span className="text-3xl">{action.icon}</span>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <h4 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-gray-900 transition-colors">
+                      {action.title}
+                    </h4>
+                    <p className="text-gray-600 group-hover:text-gray-700 transition-colors">
+                      {action.description}
+                    </p>
+                  </div>
+                  
+                  {/* Hover effect border */}
+                  <div className={`absolute inset-0 rounded-lg border-2 border-transparent group-hover:border-current group-hover:${action.hoverGradient} transition-all duration-300 opacity-0 group-hover:opacity-20`} />
                 </Card>
               </motion.div>
             ))}

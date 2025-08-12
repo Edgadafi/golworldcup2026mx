@@ -103,147 +103,134 @@ export function PaseGrupalModal({ isOpen, onClose, onSuccess }: PaseGrupalModalP
             className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            <Card className="p-6 bg-gradient-to-br from-green-50 to-blue-50 border-2 border-green-200">
+            <Card className="p-8 bg-white border-0 shadow-2xl rounded-2xl overflow-hidden relative">
+              {/* Background gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-cyan-50 to-indigo-50" />
+              
               {/* Header */}
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-                  👥 Pa$e Grupal
-                </h2>
+              <div className="relative z-10 flex items-center justify-between mb-8">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg">
+                    <span className="text-2xl">👥</span>
+                  </div>
+                  <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                    Pa$e Grupal
+                  </h2>
+                </div>
                 <button
                   onClick={handleClose}
-                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  className="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors duration-200"
                 >
-                  ✕
+                  <span className="text-lg font-semibold text-gray-600">✕</span>
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Columna Izquierda - Selección de Usuarios */}
+              {/* Form */}
+              <div className="relative z-10 space-y-6">
+                {/* Usuarios Seleccionados */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-4">👥 Seleccionar Destinatarios</h3>
-                  
-                  <div className="space-y-3 max-h-64 overflow-y-auto">
+                  <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                    <span className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                      👥
+                    </span>
+                    Usuarios Seleccionados
+                  </label>
+                  <div className="grid grid-cols-2 gap-3">
                     {availableUsers.map((user) => (
-                      <div
+                      <button
                         key={user.id}
                         onClick={() => handleUserToggle(user)}
-                        className={`p-3 rounded-lg border-2 cursor-pointer transition-all ${
+                        className={`p-3 rounded-xl border-2 transition-all duration-200 flex items-center space-x-2 ${
                           selectedUsers.find(u => u.id === user.id)
-                            ? 'border-green-500 bg-green-100'
-                            : 'border-gray-200 hover:border-green-300'
+                            ? 'border-blue-500 bg-blue-500 text-white shadow-lg shadow-blue-200'
+                            : 'border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-gray-700'
                         }`}
                       >
-                        <div className="flex items-center space-x-3">
-                          <div className="text-2xl">{user.avatar}</div>
-                          <div>
-                            <div className="font-semibold text-gray-800">{user.name}</div>
-                            <div className="text-sm text-gray-600">{user.username}</div>
-                          </div>
-                        </div>
-                      </div>
+                        <span className="text-lg">{user.avatar}</span>
+                        <span className="font-medium">{user.name}</span>
+                      </button>
                     ))}
                   </div>
-
-                  {/* Resumen de Usuarios Seleccionados */}
-                  {selectedUsers.length > 0 && (
-                    <div className="mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
-                      <h4 className="font-semibold text-green-800 mb-2">Usuarios Seleccionados:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedUsers.map((user) => (
-                          <span
-                            key={user.id}
-                            className="px-2 py-1 bg-green-200 text-green-800 rounded-full text-sm flex items-center gap-1"
-                          >
-                            {user.avatar} {user.name}
-                            <button
-                              onClick={() => handleUserToggle(user)}
-                              className="text-green-600 hover:text-green-800"
-                            >
-                              ×
-                            </button>
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                  <p className="text-sm text-gray-500 mt-2">
+                    {selectedUsers.length} usuarios seleccionados
+                  </p>
                 </div>
 
-                {/* Columna Derecha - Configuración */}
+                {/* Monto por Usuario */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-4">💰 Configuración del Pa$e</h3>
-                  
-                  {/* Montos Rápidos */}
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      💰 Monto por Usuario
-                    </label>
-                    <div className="grid grid-cols-2 gap-3">
-                      {quickAmounts.map((amount) => (
-                        <button
-                          key={amount}
-                          onClick={() => handleAmountSelect(amount)}
-                          className={`p-3 rounded-lg border-2 transition-all ${
-                            selectedAmount === amount
-                              ? 'border-green-500 bg-green-100 text-green-700'
-                              : 'border-gray-200 hover:border-green-300'
-                          }`}
-                        >
-                          ${amount}
-                        </button>
-                      ))}
-                    </div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                    <span className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                      💰
+                    </span>
+                    Monto por Usuario
+                  </label>
+                  <div className="grid grid-cols-2 gap-4 mb-4">
+                    {quickAmounts.map((amount) => (
+                      <button
+                        key={amount}
+                        onClick={() => handleAmountSelect(amount)}
+                        className={`p-4 rounded-xl border-2 transition-all duration-200 font-semibold ${
+                          selectedAmount === amount
+                            ? 'border-green-500 bg-green-500 text-white shadow-lg shadow-green-200'
+                            : 'border-gray-200 hover:border-green-300 hover:bg-green-50 text-gray-700'
+                        }`}
+                      >
+                        ${amount}
+                      </button>
+                    ))}
                   </div>
-
-                  {/* Monto Personalizado */}
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      💰 Monto Personalizado
-                    </label>
-                    <Input
-                      type="number"
-                      value={customAmount}
-                      onChange={(e) => handleCustomAmountChange(e.target.value)}
-                      placeholder="0.00"
-                      className="text-lg"
-                    />
-                  </div>
-
-                  {/* Concepto */}
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      💬 Concepto (opcional)
-                    </label>
-                    <Input
-                      type="text"
-                      value={concept}
-                      onChange={(e) => setConcept(e.target.value)}
-                      placeholder="Pa$e grupal para el equipo"
-                      className="text-lg"
-                    />
-                  </div>
-
-                  {/* Total */}
-                  {selectedUsers.length > 0 && (customAmount || selectedAmount) && (
-                    <div className="mb-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                      <div className="text-center">
-                        <h4 className="font-bold text-blue-800 text-lg">Total del Pa$e Grupal</h4>
-                        <div className="text-2xl font-bold text-blue-600">${getTotalAmount().toFixed(2)}</div>
-                        <p className="text-blue-600 text-sm">
-                          {customAmount || selectedAmount} × {selectedUsers.length} persona{selectedUsers.length > 1 ? 's' : ''}
-                        </p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Botón de Envío */}
-                  <Button
-                    onClick={handleSubmit}
-                    disabled={selectedUsers.length === 0 || (!customAmount && !selectedAmount)}
-                    className="w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:transform-none"
-                  >
-                    🚀 ¡Pa$e Grupal!
-                  </Button>
+                  <Input
+                    type="number"
+                    value={customAmount}
+                    onChange={(e) => handleCustomAmountChange(e.target.value)}
+                    placeholder="Monto personalizado"
+                    className="text-lg border-2 border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-200"
+                  />
                 </div>
+
+                {/* Concepto */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                    <span className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                      💬
+                    </span>
+                    Concepto (opcional)
+                  </label>
+                  <Input
+                    type="text"
+                    value={concept}
+                    onChange={(e) => setConcept(e.target.value)}
+                    placeholder="Pa$e grupal"
+                    className="text-lg border-2 border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200"
+                  />
+                </div>
+
+                {/* Resumen */}
+                {selectedUsers.length > 0 && (
+                  <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-4 rounded-xl border border-blue-200">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm font-medium text-blue-700">
+                        Total a enviar:
+                      </span>
+                      <span className="text-lg font-bold text-blue-800">
+                        ${(customAmount ? parseFloat(customAmount) : selectedAmount) * selectedUsers.length}
+                      </span>
+                    </div>
+                    <div className="text-xs text-blue-600 mt-1">
+                      {selectedUsers.length} usuarios × ${customAmount ? parseFloat(customAmount) : selectedAmount}
+                    </div>
+                  </div>
+                )}
+
+                {/* Botón de Envío */}
+                <Button
+                  onClick={handleSubmit}
+                  disabled={selectedUsers.length === 0}
+                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold py-4 px-8 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl disabled:transform-none"
+                >
+                  <span className="text-xl mr-2">👥</span>
+                  ¡Pa$e Grupal!
+                </Button>
               </div>
             </Card>
           </motion.div>
