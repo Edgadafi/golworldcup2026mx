@@ -10,6 +10,10 @@ import { Card } from './components/ui/Card';
 import { Button } from './components/ui/Button';
 import { CelebrationEffect } from './components/animations/CelebrationEffect';
 import { FloatingMoney } from './components/animations/FloatingMoney';
+import { PaseRapidoModal } from './components/quick-actions/PaseRapidoModal';
+import { PaseGrupalModal } from './components/quick-actions/PaseGrupalModal';
+import { PropinaModal } from './components/quick-actions/PropinaModal';
+import { MercadoPrediccionesModal } from './components/quick-actions/MercadoPrediccionesModal';
 
 // Datos mock para las estadísticas
 const mockStats = [
@@ -65,6 +69,12 @@ export default function HomePage() {
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
   const [daysToWorldCup, setDaysToWorldCup] = useState(getDaysToWorldCup());
   const [showCelebration, setShowCelebration] = useState(false);
+  
+  // Estados para las funcionalidades rápidas
+  const [isPaseRapidoOpen, setIsPaseRapidoOpen] = useState(false);
+  const [isPaseGrupalOpen, setIsPaseGrupalOpen] = useState(false);
+  const [isPropinaOpen, setIsPropinaOpen] = useState(false);
+  const [isMercadoOpen, setIsMercadoOpen] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -75,8 +85,22 @@ export default function HomePage() {
   }, []);
 
   const handleQuickAction = (action: string) => {
-    console.log(`Acción rápida: ${action}`);
-    // Aquí se pueden implementar las acciones específicas
+    switch (action) {
+      case 'Pa$e Rápido':
+        setIsPaseRapidoOpen(true);
+        break;
+      case 'Pa$e Grupal':
+        setIsPaseGrupalOpen(true);
+        break;
+      case 'Propina':
+        setIsPropinaOpen(true);
+        break;
+      case 'Mercado':
+        setIsMercadoOpen(true);
+        break;
+      default:
+        console.log(`Acción rápida: ${action}`);
+    }
   };
 
   // Función para manejar el éxito de transferencia (se puede usar en el futuro)
@@ -179,11 +203,12 @@ export default function HomePage() {
             🚀 Acciones Rápidas
           </motion.h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { icon: '🚀', title: 'Pa$e Rápido', description: 'Transferencia instantánea' },
               { icon: '👥', title: 'Pa$e Grupal', description: 'Enviar a múltiples usuarios' },
-              { icon: '🎁', title: 'Propina', description: 'Dar propina fácilmente' }
+              { icon: '🎁', title: 'Propina', description: 'Dar propina fácilmente' },
+              { icon: '📊', title: 'Mercado', description: 'Predicciones deportivas' }
             ].map((action, index) => (
               <motion.div
                 key={action.title}
@@ -275,6 +300,52 @@ export default function HomePage() {
       <TransferForm
         isOpen={isTransferModalOpen}
         onClose={() => setIsTransferModalOpen(false)}
+      />
+
+      {/* Modales de Funcionalidades Rápidas */}
+      <PaseRapidoModal
+        isOpen={isPaseRapidoOpen}
+        onClose={() => setIsPaseRapidoOpen(false)}
+        onSuccess={(amount, recipient, concept) => {
+          console.log(`Pa$e rápido enviado: $${amount} a ${recipient}`);
+          setShowCelebration(true);
+          setTimeout(() => setShowCelebration(false), 3000);
+        }}
+      />
+
+      <PaseGrupalModal
+        isOpen={isPaseGrupalOpen}
+        onClose={() => setIsPaseGrupalOpen(false)}
+        onSuccess={(amount, users, concept) => {
+          console.log(`Pa$e grupal enviado: $${amount} a ${users.length} usuarios`);
+          setShowCelebration(true);
+          setTimeout(() => setShowCelebration(false), 3000);
+        }}
+      />
+
+      <PropinaModal
+        isOpen={isPropinaOpen}
+        onClose={() => setIsPropinaOpen(false)}
+        onSuccess={(amount, recipient, category, message) => {
+          console.log(`Propina enviada: $${amount} a ${recipient} por ${category}`);
+          setShowCelebration(true);
+          setTimeout(() => setShowCelebration(false), 3000);
+        }}
+      />
+
+      <MercadoPrediccionesModal
+        isOpen={isMercadoOpen}
+        onClose={() => setIsMercadoOpen(false)}
+        onBuy={(predictionId, price) => {
+          console.log(`Predicción comprada: ${predictionId} por $${price}`);
+          setShowCelebration(true);
+          setTimeout(() => setShowCelebration(false), 3000);
+        }}
+        onSell={(predictionId, price) => {
+          console.log(`Predicción retirada: ${predictionId}`);
+          setShowCelebration(true);
+          setTimeout(() => setShowCelebration(false), 3000);
+        }}
       />
 
       {/* Celebration Effect Global */}
