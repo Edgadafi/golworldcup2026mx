@@ -1,0 +1,32 @@
+{
+  "name": "Pa$e a Gol - Mundial México 2026",
+  "description": "Frame de Farcaster para transferencias del Mundial de México 2026",
+  "image": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/images/hero-1200x630.png.png",
+  "external_url": "https://flashsend-cdmx.vercel.app",
+  "frame": {
+    "image": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/images/og-1200x630.png.png",
+    "buttons": [
+      {
+        "label": "⚽ Iniciar Transferencia",
+        "action": "post"
+      },
+      {
+        "label": "🏆 Ver Estadísticas",
+        "action": "post"
+      }
+    ],
+    "post_url": "https://flashsend-cdmx.vercel.app/api/frame"
+  },
+  "assets": {
+    "hero": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/images/hero-1200x630.png.png",
+    "og": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/images/og-1200x630.png.png",
+    "preview": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/images/preview-1200x630.png.png",
+    "icon": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/icons/icon-1024.png.png",
+    "splash": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/icons/splash-200.png.png",
+    "screenshots": {
+      "dashboard": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/screenshots/screenshot-1-dashboard.png.png",
+      "prediccion": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/screenshots/screenshot-2-prediccion.png.png",
+      "equipo": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/screenshots/screenshot-3-equipo.png.png"
+    }
+  }
+}
