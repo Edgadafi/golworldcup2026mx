@@ -25,8 +25,8 @@
     "splash": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/icons/splash-200.png.png",
     "screenshots": {
       "dashboard": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/screenshots/screenshot-1-dashboard.png.png",
-      "prediccion": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/screenshots/screenshot-2-prediccion.png.png",
-      "equipo": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/screenshots/screenshot-3-equipo.png.png"
+      "prediccion": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/images/screenshot-2-prediccion.png.png",
+      "equipo": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/images/screenshot-3-equipo.png.png"
     }
   }
 }
