@@ -1,9 +1,9 @@
 
 {
     "accountAssociation": {
-      "header": "PENDIENTE_GENERAR",
-      "payload": "PENDIENTE_GENERAR", 
-      "signature": "PENDIENTE_GENERAR"
+      "header": "eyJmaWQiOjcwODkwMiwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDgwZTdBYjMxMTk0NjczMWRGNzUzYWU4OEU5OWRkMmVlNEMwMzRkNTQifQ",
+      "payload": "eyJkb21haW4iOiJmbGFzaHNlbmQtY2RteC52ZXJjZWwuYXBwIn0",
+      "signature": "MHhhOTgzZmY2MmY3NGU1ODIwZGZkM2IwMjNlMzhjMzVjNDM3NzcyMjc0NmM4ODdhYTJjNjZiMzNmZjk3NGFhOTkzMmEzYzRjYWExYjc1NDY2NDY3YjNhMTBjZjJiNDJlMjVjODA2MjI1MjA5ZjdmZTQ4NmZkMGE4MTQzNzhmMDUwNDFi"
     },
     "miniapp": {
       "version": "1",
