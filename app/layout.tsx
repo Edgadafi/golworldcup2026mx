@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import '@coinbase/onchainkit/styles.css'
 import Providers from './providers'
+import { FarcasterInitializer } from './components/FarcasterInitializer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,7 +20,11 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={inter.className}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <FarcasterInitializer>
+            {children}
+          </FarcasterInitializer>
+        </Providers>
       </body>
     </html>
   )

@@ -14,6 +14,7 @@ import { PaseRapidoModal } from './components/quick-actions/PaseRapidoModal';
 import { PaseGrupalModal } from './components/quick-actions/PaseGrupalModal';
 import { PropinaModal } from './components/quick-actions/PropinaModal';
 import { MercadoPrediccionesModal } from './components/quick-actions/MercadoPrediccionesModal';
+import { useFarcasterSDK } from './hooks/useFarcasterSDK';
 
 // Datos mock para las estadísticas
 const mockStats = [
@@ -66,6 +67,9 @@ const getDaysToWorldCup = () => {
 };
 
 export default function HomePage() {
+  // Initialize Farcaster SDK
+  const { sdk, isReady, callReady } = useFarcasterSDK();
+  
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
   const [daysToWorldCup, setDaysToWorldCup] = useState(getDaysToWorldCup());
   const [showCelebration, setShowCelebration] = useState(false);
