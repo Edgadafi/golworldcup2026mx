@@ -73,7 +73,7 @@ export default function HomePage() {
   // Estados para las funcionalidades rápidas
   const [isPaseRapidoOpen, setIsPaseRapidoOpen] = useState(false);
   const [isPaseGrupalOpen, setIsPaseGrupalOpen] = useState(false);
-  const [isPropinaOpen, setIsPropinaOpen] = useState(false);
+
   const [isMercadoOpen, setIsMercadoOpen] = useState(false);
 
   useEffect(() => {
@@ -93,7 +93,7 @@ export default function HomePage() {
         setIsPaseGrupalOpen(true);
         break;
       case 'Propina':
-        setIsPropinaOpen(true);
+
         break;
       case 'Mercado':
         setIsMercadoOpen(true);
@@ -103,11 +103,7 @@ export default function HomePage() {
     }
   };
 
-  // Función para manejar el éxito de transferencia (se puede usar en el futuro)
-  const handleTransferSuccess = () => {
-    setShowCelebration(true);
-    setTimeout(() => setShowCelebration(false), 3000);
-  };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-green-100">
@@ -348,7 +344,7 @@ export default function HomePage() {
       <PaseRapidoModal
         isOpen={isPaseRapidoOpen}
         onClose={() => setIsPaseRapidoOpen(false)}
-        onSuccess={(amount, recipient, concept) => {
+        onSuccess={(amount, recipient) => {
           console.log(`Pa$e rápido enviado: $${amount} a ${recipient}`);
           setShowCelebration(true);
           setTimeout(() => setShowCelebration(false), 3000);
@@ -358,18 +354,8 @@ export default function HomePage() {
       <PaseGrupalModal
         isOpen={isPaseGrupalOpen}
         onClose={() => setIsPaseGrupalOpen(false)}
-        onSuccess={(amount, users, concept) => {
+        onSuccess={(amount, users) => {
           console.log(`Pa$e grupal enviado: $${amount} a ${users.length} usuarios`);
-          setShowCelebration(true);
-          setTimeout(() => setShowCelebration(false), 3000);
-        }}
-      />
-
-      <PropinaModal
-        isOpen={isPropinaOpen}
-        onClose={() => setIsPropinaOpen(false)}
-        onSuccess={(amount, recipient, category, message) => {
-          console.log(`Propina enviada: $${amount} a ${recipient} por ${category}`);
           setShowCelebration(true);
           setTimeout(() => setShowCelebration(false), 3000);
         }}
@@ -378,12 +364,12 @@ export default function HomePage() {
       <MercadoPrediccionesModal
         isOpen={isMercadoOpen}
         onClose={() => setIsMercadoOpen(false)}
-        onBuy={(predictionId, price) => {
-          console.log(`Predicción comprada: ${predictionId} por $${price}`);
+        onBuy={(predictionId) => {
+          console.log(`Predicción comprada: ${predictionId}`);
           setShowCelebration(true);
           setTimeout(() => setShowCelebration(false), 3000);
         }}
-        onSell={(predictionId, price) => {
+        onSell={(predictionId) => {
           console.log(`Predicción retirada: ${predictionId}`);
           setShowCelebration(true);
           setTimeout(() => setShowCelebration(false), 3000);

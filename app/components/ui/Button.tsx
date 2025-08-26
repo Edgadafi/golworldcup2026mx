@@ -44,13 +44,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     // Filtrar props compatibles con motion.button
     const {
-      onAnimationStart,
-      onAnimationEnd,
-      onDragStart,
-      onDragEnd,
-      onDragOver,
-      onDrag,
-      onDrop,
       ...motionProps
     } = props;
 

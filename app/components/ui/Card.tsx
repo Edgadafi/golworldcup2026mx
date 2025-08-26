@@ -15,13 +15,6 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, hover = true, glow = 'none', celebration = false, children, ...props }, ref) => {
     // Filtrar props compatibles con motion.div
     const {
-      onAnimationStart,
-      onAnimationEnd,
-      onDragStart,
-      onDragEnd,
-      onDragOver,
-      onDrag,
-      onDrop,
       ...motionProps
     } = props;
 

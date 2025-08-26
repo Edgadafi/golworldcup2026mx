@@ -49,13 +49,6 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
 
     // Filtrar props compatibles con motion.div
     const {
-      onAnimationStart,
-      onAnimationEnd,
-      onDragStart,
-      onDragEnd,
-      onDragOver,
-      onDrag,
-      onDrop,
       ...motionProps
     } = props;
 

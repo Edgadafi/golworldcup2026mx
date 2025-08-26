@@ -80,10 +80,7 @@ export function PaseGrupalModal({ isOpen, onClose, onSuccess }: PaseGrupalModalP
     onClose();
   };
 
-  const getTotalAmount = () => {
-    const amount = customAmount ? parseFloat(customAmount) : selectedAmount;
-    return amount * selectedUsers.length;
-  };
+
 
   return (
     <AnimatePresence>

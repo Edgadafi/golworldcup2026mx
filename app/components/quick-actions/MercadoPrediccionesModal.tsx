@@ -8,6 +8,7 @@ import { Card } from '../ui/Card';
 
 interface Prediction {
   id: string;
+  sport: string;
   match: string;
   prediction: string;
   odds: number;
@@ -18,6 +19,7 @@ interface Prediction {
   accuracy: number;
   followers: number;
   status: 'active' | 'won' | 'lost';
+  deadline: string;
 }
 
 interface MercadoPrediccionesModalProps {
@@ -28,13 +30,14 @@ interface MercadoPrediccionesModalProps {
 }
 
 export function MercadoPrediccionesModal({ isOpen, onClose, onBuy, onSell }: MercadoPrediccionesModalProps) {
-  const [activeTab, setActiveTab] = useState<'market' | 'my-predictions'>('market');
+  const [activeTab, setActiveTab] = useState<'Mercado' | 'Mis Predicciones'>('Mercado');
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   // Predicciones del mercado
   const marketPredictions: Prediction[] = [
     {
       id: '1',
+      sport: '⚽ Fútbol',
       match: 'PSG vs Manchester City',
       prediction: 'Victoria Local',
       odds: 2.8,
@@ -44,10 +47,12 @@ export function MercadoPrediccionesModal({ isOpen, onClose, onBuy, onSell }: Mer
       creator: '@ProPredictor',
       accuracy: 89,
       followers: 456,
-      status: 'active'
+      status: 'active',
+      deadline: '2024-12-20'
     },
     {
       id: '2',
+      sport: '⚽ Fútbol',
       match: 'Liverpool vs Arsenal',
       prediction: 'Más de 2.5 goles',
       odds: 3.1,
@@ -57,10 +62,12 @@ export function MercadoPrediccionesModal({ isOpen, onClose, onBuy, onSell }: Mer
       creator: '@FootballGuru',
       accuracy: 92,
       followers: 1200,
-      status: 'active'
+      status: 'active',
+      deadline: '2024-12-22'
     },
     {
       id: '3',
+      sport: '⚽ Fútbol',
       match: 'Barcelona vs Real Madrid',
       prediction: 'Empate',
       odds: 2.5,
@@ -70,7 +77,8 @@ export function MercadoPrediccionesModal({ isOpen, onClose, onBuy, onSell }: Mer
       creator: '@LaLigaExpert',
       accuracy: 87,
       followers: 890,
-      status: 'active'
+      status: 'active',
+      deadline: '2024-12-25'
     }
   ];
 
@@ -78,6 +86,7 @@ export function MercadoPrediccionesModal({ isOpen, onClose, onBuy, onSell }: Mer
   const myPredictions: Prediction[] = [
     {
       id: '4',
+      sport: '⚽ Fútbol',
       match: 'Real Madrid vs Bayern Munich',
       prediction: 'Victoria Visitante',
       odds: 2.5,
@@ -87,11 +96,12 @@ export function MercadoPrediccionesModal({ isOpen, onClose, onBuy, onSell }: Mer
       creator: 'Tú',
       accuracy: 85,
       followers: 0,
-      status: 'active'
+      status: 'active',
+      deadline: '2024-12-28'
     }
   ];
 
-  const filteredPredictions = marketPredictions.filter(pred => 
+  const filteredPredictions = (activeTab === 'Mercado' ? marketPredictions : myPredictions).filter(pred => 
     pred.match.toLowerCase().includes(searchTerm.toLowerCase()) ||
     pred.creator.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -104,21 +114,7 @@ export function MercadoPrediccionesModal({ isOpen, onClose, onBuy, onSell }: Mer
     onSell(predictionId, price);
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'won': return 'bg-green-100 text-green-800 border-green-200';
-      case 'lost': return 'bg-red-100 text-red-800 border-red-200';
-      default: return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-    }
-  };
 
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case 'won': return 'Ganada';
-      case 'lost': return 'Perdida';
-      default: return 'En juego';
-    }
-  };
 
   return (
     <AnimatePresence>
