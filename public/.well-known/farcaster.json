@@ -8,23 +8,26 @@
     "miniapp": {
       "version": "1",
       "name": "FlashSend CDMX",
-      "iconUrl": "https://flashsend-cdmx.vercel.app/icons/icon-1024.png",
+      "iconUrl": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/icons/icon-1024.png.png",
       "homeUrl": "https://flashsend-cdmx.vercel.app/",
-      "imageUrl": "https://flashsend-cdmx.vercel.app/images/preview-1200x630.png",
+      "imageUrl": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/images/preview-1200x630.png.png",
       "buttonTitle": "Pa$e a Gol ⚽",
-      "splashImageUrl": "https://flashsend-cdmx.vercel.app/icons/splash-200.png",
+      "splashImageUrl": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/icons/splash-200.png.png",
       "splashBackgroundColor": "#0F172A",
       "subtitle": "Conecta y comparte al instante",
       "description": "Transforma cómo compartes dinero en CDMX. Conecta con tu comunidad, envía al instante y descubre el poder de una red financiera descentralizada.",
-      "heroImageUrl": "https://flashsend-cdmx.vercel.app/images/hero-1200x630.png",
-      "ogImageUrl": "https://flashsend-cdmx.vercel.app/images/preview-1200x630.png",
+      "heroImageUrl": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/images/hero-1200x630.png.png",
+      "ogImageUrl": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/images/og-1200x630.png.png",
       "screenshotUrls": [
-        "https://flashsend-cdmx.vercel.app/screenshots/screenshot-1-dashboard.png",
-        "https://flashsend-cdmx.vercel.app/screenshots/screenshot-2-send.png",
-        "https://flashsend-cdmx.vercel.app/screenshots/screenshot-3-success.png"
+        "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/screenshots/screenshot-1-dashboard.png.png",
+        "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/screenshots/screenshot-2-prediccion.png.png",
+        "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/screenshots/screenshot-3-equipo.png.png"
       ],
       "primaryCategory": "finance",
       "tagline": "Cada pase es ganador",
       "tags": ["finance", "payments", "cdmx", "social", "community"]
+    },
+    "baseBuilder": {
+      "allowedAddresses": ["0x8e92E0EaB6A1d17471b29697195041172013d730"]
     }
   }
