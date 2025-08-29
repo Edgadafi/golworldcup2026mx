@@ -9,9 +9,10 @@ interface FarcasterInitializerProps {
 }
 
 export function FarcasterInitializer({ children }: FarcasterInitializerProps) {
-  const { isReady, callReady, error } = useFarcasterSDK();
+  const { isReady, callReady, error, isFarcasterEnv, sdk } = useFarcasterSDK();
   const [showLoading, setShowLoading] = useState(true);
   const [loadingTime, setLoadingTime] = useState(0);
+  const [retryCount, setRetryCount] = useState(0);
 
   useEffect(() => {
     // Show loading for at least 1 second to ensure smooth transition
@@ -34,9 +35,23 @@ export function FarcasterInitializer({ children }: FarcasterInitializerProps) {
   useEffect(() => {
     if (!isReady && loadingTime > 3000) {
       console.log('Loading taking too long, forcing ready call...');
+      setRetryCount(prev => prev + 1);
       callReady();
     }
   }, [isReady, loadingTime, callReady]);
+
+  // Additional retry mechanism for Farcaster environment
+  useEffect(() => {
+    if (isFarcasterEnv && !isReady && sdk && retryCount < 3) {
+      const timer = setTimeout(() => {
+        console.log(`Retry ${retryCount + 1}: Forcing ready() call in Farcaster environment...`);
+        setRetryCount(prev => prev + 1);
+        callReady();
+      }, 2000 + (retryCount * 1000));
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isFarcasterEnv, isReady, sdk, retryCount, callReady]);
 
   // Show loading screen while initializing
   if (showLoading || !isReady) {
@@ -62,6 +77,11 @@ export function FarcasterInitializer({ children }: FarcasterInitializerProps) {
             Inicializando aplicación...
           </p>
           
+          {/* Environment info */}
+          <div className="text-xs text-gray-500 mb-2">
+            Entorno: {isFarcasterEnv ? 'Farcaster' : 'Local'}
+          </div>
+          
           {/* Debug info */}
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4 max-w-md mx-auto">
@@ -71,7 +91,7 @@ export function FarcasterInitializer({ children }: FarcasterInitializerProps) {
           )}
           
           <div className="text-xs text-gray-500 mb-4">
-            Tiempo de carga: {Math.round(loadingTime / 1000)}s
+            Tiempo: {Math.round(loadingTime / 1000)}s | Intentos: {retryCount}
           </div>
           
           <div className="flex justify-center space-x-2">
@@ -95,12 +115,21 @@ export function FarcasterInitializer({ children }: FarcasterInitializerProps) {
           {/* Force ready button for debugging */}
           {loadingTime > 2000 && (
             <button
-              onClick={callReady}
+              onClick={() => {
+                setRetryCount(prev => prev + 1);
+                callReady();
+              }}
               className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm"
             >
-              Forzar Inicialización
+              Forzar Inicialización (Intento {retryCount + 1})
             </button>
           )}
+          
+          {/* SDK Status */}
+          <div className="mt-4 text-xs text-gray-600">
+            SDK: {sdk ? '✅ Disponible' : '❌ No disponible'} | 
+            Ready: {isReady ? '✅ Llamado' : '❌ Pendiente'}
+          </div>
         </div>
       </motion.div>
     );
