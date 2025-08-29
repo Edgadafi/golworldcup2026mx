@@ -1,0 +1,78 @@
+{
+  "name": "Pa$e A Gol CDMX",
+  "short_name": "Pa$e A Gol",
+  "description": "Transforma cómo compartes dinero en CDMX. Conecta con tu comunidad, envía al instante y descubre el poder de una red financiera descentralizada.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F172A",
+  "theme_color": "#0F172A",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "es-MX",
+  "categories": ["finance", "social", "utilities"],
+  "icons": [
+    {
+      "src": "/Pa$e%20a%20Gol-assets/icons/icon-1024.png.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/Pa$e%20a%20Gol-assets/icons/splash-200.png.png",
+      "sizes": "200x200",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/Pa$e%20a%20Gol-assets/screenshots/screenshot-1-dashboard.png.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Dashboard principal de Pa$e A Gol CDMX"
+    },
+    {
+      "src": "/Pa$e%20a%20Gol-assets/screenshots/screenshot-2-prediccion.png.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Predicciones del Mundial 2026"
+    },
+    {
+      "src": "/Pa$e%20a%20Gol-assets/screenshots/screenshot-3-equipo.png.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Gestión de equipos y grupos"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Pa$e Rápido",
+      "short_name": "Rápido",
+      "description": "Enviar dinero rápidamente",
+      "url": "/?action=rapido",
+      "icons": [
+        {
+          "src": "/Pa$e%20a%20Gol-assets/icons/icon-1024.png.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Pa$e Grupal",
+      "short_name": "Grupal",
+      "description": "Enviar dinero a grupos",
+      "url": "/?action=grupal",
+      "icons": [
+        {
+          "src": "/Pa$e%20a%20Gol-assets/icons/icon-1024.png.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}
