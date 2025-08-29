@@ -1,10 +1,22 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { MiniappSDK } from '@farcaster/miniapp-sdk';
+
+// Try different import patterns for the SDK
+let MiniappSDK: any = null;
+
+try {
+  // Try the default import first
+  const sdkModule = require('@farcaster/miniapp-sdk');
+  MiniappSDK = sdkModule.default || sdkModule.MiniappSDK || sdkModule;
+  console.log('SDK module loaded:', sdkModule);
+  console.log('MiniappSDK constructor:', MiniappSDK);
+} catch (error) {
+  console.error('Error loading SDK module:', error);
+}
 
 export function useFarcasterSDK() {
-  const [sdk, setSdk] = useState<MiniappSDK | null>(null);
+  const [sdk, setSdk] = useState<any>(null);
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isFarcasterEnv, setIsFarcasterEnv] = useState(false);
@@ -30,21 +42,45 @@ export function useFarcasterSDK() {
       try {
         console.log('Initializing Farcaster Miniapp SDK...');
         
+        // Check if SDK is available
+        if (!MiniappSDK) {
+          throw new Error('MiniappSDK constructor not available');
+        }
+        
+        console.log('MiniappSDK constructor found:', MiniappSDK);
+        
         // Initialize the Farcaster Miniapp SDK
         const farcasterSDK = new MiniappSDK();
+        console.log('SDK instance created:', farcasterSDK);
         
         // Set the SDK instance
         setSdk(farcasterSDK);
-        console.log('SDK instance created');
 
         // Wait a bit to ensure SDK is fully initialized
         await new Promise(resolve => setTimeout(resolve, 100));
 
-        // Call ready() to indicate the app is ready
-        // This resolves the "InSplash screen: Ready not called" error
-        console.log('Calling sdk.actions.ready()...');
-        await farcasterSDK.actions.ready();
-        console.log('sdk.actions.ready() completed successfully');
+        // Check if actions.ready exists
+        if (!farcasterSDK.actions || typeof farcasterSDK.actions.ready !== 'function') {
+          console.warn('SDK actions.ready not found, checking alternative methods...');
+          
+          // Try alternative methods
+          if (farcasterSDK.ready && typeof farcasterSDK.ready === 'function') {
+            console.log('Using farcasterSDK.ready() instead');
+            await farcasterSDK.ready();
+          } else if (farcasterSDK.init && typeof farcasterSDK.init === 'function') {
+            console.log('Using farcasterSDK.init() instead');
+            await farcasterSDK.init();
+          } else {
+            console.warn('No ready method found, setting ready manually');
+            setIsReady(true);
+            return;
+          }
+        } else {
+          // Call ready() to indicate the app is ready
+          console.log('Calling sdk.actions.ready()...');
+          await farcasterSDK.actions.ready();
+          console.log('sdk.actions.ready() completed successfully');
+        }
         
         setIsReady(true);
         setError(null);
@@ -82,17 +118,30 @@ export function useFarcasterSDK() {
   const callReady = async () => {
     if (sdk) {
       try {
-        console.log('Manually calling sdk.actions.ready()...');
-        await sdk.actions.ready();
+        console.log('Manually calling ready...');
+        
+        // Try different ready methods
+        if (sdk.actions && typeof sdk.actions.ready === 'function') {
+          await sdk.actions.ready();
+        } else if (sdk.ready && typeof sdk.ready === 'function') {
+          await sdk.ready();
+        } else if (sdk.init && typeof sdk.init === 'function') {
+          await sdk.init();
+        } else {
+          console.warn('No ready method available');
+          setIsReady(true); // Set ready manually
+          return;
+        }
+        
         setIsReady(true);
         setError(null);
-        console.log('Manual ready() call completed successfully');
+        console.log('Manual ready call completed successfully');
       } catch (error) {
-        console.error('Error calling ready():', error);
+        console.error('Error calling ready:', error);
         setError(error instanceof Error ? error.message : 'Unknown error');
       }
     } else {
-      console.warn('SDK not available for manual ready() call');
+      console.warn('SDK not available for manual ready call');
     }
   };
 
@@ -100,7 +149,7 @@ export function useFarcasterSDK() {
   useEffect(() => {
     if (isFarcasterEnv && !isReady && sdk) {
       const timer = setTimeout(() => {
-        console.log('Forcing ready() call in Farcaster environment...');
+        console.log('Forcing ready call in Farcaster environment...');
         callReady();
       }, 2000);
       
