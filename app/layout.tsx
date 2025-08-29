@@ -14,11 +14,6 @@ export const metadata: Metadata = {
   authors: [{ name: 'FlashSend CDMX' }],
   creator: 'FlashSend CDMX',
   publisher: 'FlashSend CDMX',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
   metadataBase: new URL('https://flashsend-cdmx.vercel.app'),
   alternates: {
     canonical: '/',
@@ -35,12 +30,6 @@ export const metadata: Metadata = {
         height: 630,
         alt: 'Pa$e A Gol CDMX - Mundial 2026 Ready',
       },
-      {
-        url: '/Pa$e%20a%20Gol-assets/images/hero-1200x630.png.png',
-        width: 1200,
-        height: 630,
-        alt: 'Pa$e A Gol CDMX Hero Image',
-      },
     ],
     locale: 'es_MX',
     type: 'website',
@@ -50,19 +39,6 @@ export const metadata: Metadata = {
     title: 'Pa$e A Gol CDMX - Mundial 2026 Ready',
     description: 'Transforma cómo compartes dinero en CDMX. Conecta con tu comunidad, envía al instante y descubre el poder de una red financiera descentralizada.',
     images: ['/Pa$e%20a%20Gol-assets/images/preview-1200x630.png.png'],
-    creator: '@flashsend_cdmx',
-  },
-  other: {
-    'fc:frame': 'vNext',
-    'fc:frame:image': 'https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/images/preview-1200x630.png.png',
-    'fc:frame:button:1': '⚽ ¡Pa$e a Gol!',
-    'fc:frame:button:2': '🎯 Ver Estadísticas',
-    'fc:frame:button:3': '🏆 Mundial 2026',
-    'fc:frame:button:4': '💰 Conectar Wallet',
-    'fc:frame:post_url': 'https://flashsend-cdmx.vercel.app',
-    'fc:frame:input:text': 'Monto a transferir (MXN)',
-    'fc:frame:state': 'pase-a-gol-cdmx-v1',
-    'fc:frame:aspect_ratio': '1.91:1',
   },
   robots: {
     index: true,
@@ -74,11 +50,6 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  },
-  verification: {
-    google: 'your-google-verification-code',
-    yandex: 'your-yandex-verification-code',
-    yahoo: 'your-yahoo-verification-code',
   },
 }
 
@@ -99,6 +70,18 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="32x32" href="/Pa$e%20a%20Gol-assets/icons/icon-1024.png.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/Pa$e%20a%20Gol-assets/icons/icon-1024.png.png" />
         <link rel="manifest" href="/manifest.json" />
+        
+        {/* Farcaster Frame Metadata */}
+        <meta property="fc:frame" content="vNext" />
+        <meta property="fc:frame:image" content="https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/images/preview-1200x630.png.png" />
+        <meta property="fc:frame:button:1" content="⚽ ¡Pa$e a Gol!" />
+        <meta property="fc:frame:button:2" content="🎯 Ver Estadísticas" />
+        <meta property="fc:frame:button:3" content="🏆 Mundial 2026" />
+        <meta property="fc:frame:button:4" content="💰 Conectar Wallet" />
+        <meta property="fc:frame:post_url" content="https://flashsend-cdmx.vercel.app" />
+        <meta property="fc:frame:input:text" content="Monto a transferir (MXN)" />
+        <meta property="fc:frame:state" content="pase-a-gol-cdmx-v1" />
+        <meta property="fc:frame:aspect_ratio" content="1.91:1" />
       </head>
       <body className={inter.className}>
         <Providers>
