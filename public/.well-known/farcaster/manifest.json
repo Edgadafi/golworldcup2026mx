@@ -1,0 +1,11 @@
+{
+  "name": "pa$e a gol",
+  "description": "Mini app gamificada para predicciones y pagos durante la Copa Mundial 2026",
+  "icon": "https://flashsend-cdmx.vercel.app/PaseaGol-assets/icons/icon-1024.png",
+  "splashImage": "https://flashsend-cdmx.vercel.app/PaseaGol-assets/icons/splash-200.png",
+  "homeUrl": "https://flashsend-cdmx.vercel.app",
+  "developer": {
+    "name": "Equipo pa$e a gol",
+    "url": "https://flashsend-cdmx.vercel.app"
+  }
+}
