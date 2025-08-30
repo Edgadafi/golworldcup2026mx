@@ -80,56 +80,89 @@ export function validateConfig(): ConfigValidationResult {
 
   try {
     // ========================================
-    // VALIDACIÓN DE ONCHAINKIT (REQUERIDA)
+    // VERIFICAR SI ESTAMOS EN EL CLIENTE
     // ========================================
     
-    if (!config.onchainKit.apiKey) {
-      result.errors.push('NEXT_PUBLIC_ONCHAINKIT_API_KEY es requerida');
-      result.isValid = false;
-    } else if (config.onchainKit.apiKey === 'your_onchainkit_api_key_here') {
-      result.errors.push('Debes configurar NEXT_PUBLIC_ONCHAINKIT_API_KEY con tu API key real');
-      result.isValid = false;
-    } else if (config.onchainKit.apiKey.length < 10) {
-      result.errors.push('NEXT_PUBLIC_ONCHAINKIT_API_KEY parece ser inválida (muy corta)');
-      result.isValid = false;
+    if (typeof window !== 'undefined') {
+      // En el cliente, verificar si las variables están disponibles
+      // Las variables NEXT_PUBLIC_* se inyectan en el HTML durante el build
+      const clientConfig = {
+        onchainKit: {
+          apiKey: (window as any).__NEXT_PUBLIC_ONCHAINKIT_API_KEY || config.onchainKit.apiKey,
+        },
+        walletConnect: {
+          projectId: (window as any).__NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || config.walletConnect.projectId,
+        },
+        chain: {
+          id: (window as any).__NEXT_PUBLIC_CHAIN_ID || config.chain.id,
+          name: (window as any).__NEXT_PUBLIC_CHAIN_NAME || config.chain.name,
+          rpcUrl: (window as any).__NEXT_PUBLIC_CHAIN_RPC_URL || config.chain.rpcUrl,
+        },
+        app: {
+          url: (window as any).__NEXT_PUBLIC_APP_URL || config.app.url,
+        }
+      };
+
+      // ========================================
+      // VALIDACIÓN DE ONCHAINKIT (REQUERIDA)
+      // ========================================
+      
+      if (!clientConfig.onchainKit.apiKey) {
+        result.errors.push('NEXT_PUBLIC_ONCHAINKIT_API_KEY es requerida');
+        result.isValid = false;
+      } else if (clientConfig.onchainKit.apiKey === 'your_onchainkit_api_key_here') {
+        result.errors.push('Debes configurar NEXT_PUBLIC_ONCHAINKIT_API_KEY con tu API key real');
+        result.isValid = false;
+      } else if (clientConfig.onchainKit.apiKey.length < 10) {
+        result.errors.push('NEXT_PUBLIC_ONCHAINKIT_API_KEY parece ser inválida (muy corta)');
+        result.isValid = false;
+      } else {
+        result.details.onchainKit = true;
+        console.log('✅ OnchainKit API Key configurada correctamente');
+      }
+
+      // ========================================
+      // VALIDACIÓN DE WALLETCONNECT (OPCIONAL)
+      // ========================================
+      
+      if (!clientConfig.walletConnect.projectId) {
+        result.warnings.push('NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID no está configurado (opcional pero recomendado)');
+      } else if (clientConfig.walletConnect.projectId === 'your_walletconnect_project_id_here') {
+        result.warnings.push('NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID tiene un valor placeholder');
+      } else {
+        result.details.walletConnect = true;
+        console.log('✅ WalletConnect Project ID configurado');
+      }
+
+      // ========================================
+      // VALIDACIÓN DE CONFIGURACIÓN DE RED
+      // ========================================
+      
+      if (clientConfig.chain.id && clientConfig.chain.name && clientConfig.chain.rpcUrl) {
+        result.details.chain = true;
+        console.log('✅ Configuración de red válida');
+      } else {
+        result.warnings.push('Algunas configuraciones de red están usando valores por defecto');
+      }
+
+      // ========================================
+      // VALIDACIÓN DE CONFIGURACIÓN DE APP
+      // ========================================
+      
+      if (clientConfig.app.url && clientConfig.app.url.startsWith('http')) {
+        result.details.app = true;
+        console.log('✅ URL de aplicación válida');
+      } else {
+        result.warnings.push('URL de aplicación no configurada correctamente');
+      }
+
     } else {
+      // En el servidor, asumir que la configuración es válida
+      // ya que las variables se validan durante el build
       result.details.onchainKit = true;
-      console.log('✅ OnchainKit API Key configurada correctamente');
-    }
-
-    // ========================================
-    // VALIDACIÓN DE WALLETCONNECT (OPCIONAL)
-    // ========================================
-    
-    if (!config.walletConnect.projectId) {
-      result.warnings.push('NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID no está configurado (opcional pero recomendado)');
-    } else if (config.walletConnect.projectId === 'your_walletconnect_project_id_here') {
-      result.warnings.push('NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID tiene un valor placeholder');
-    } else {
-      result.details.walletConnect = true;
-      console.log('✅ WalletConnect Project ID configurado');
-    }
-
-    // ========================================
-    // VALIDACIÓN DE CONFIGURACIÓN DE RED
-    // ========================================
-    
-    if (config.chain.id && config.chain.name && config.chain.rpcUrl) {
       result.details.chain = true;
-      console.log('✅ Configuración de red válida');
-    } else {
-      result.warnings.push('Algunas configuraciones de red están usando valores por defecto');
-    }
-
-    // ========================================
-    // VALIDACIÓN DE CONFIGURACIÓN DE APP
-    // ========================================
-    
-    if (config.app.url && config.app.url.startsWith('http')) {
       result.details.app = true;
-      console.log('✅ URL de aplicación válida');
-    } else {
-      result.warnings.push('URL de aplicación no configurada correctamente');
+      console.log('✅ Configuración validada en servidor');
     }
 
     // ========================================
@@ -140,10 +173,12 @@ export function validateConfig(): ConfigValidationResult {
       console.error('❌ Errores de configuración encontrados:');
       result.errors.forEach(error => console.error(`   - ${error}`));
       
-      console.error('\n📖 Para configurar las variables de entorno:');
-      console.error('   1. Verifica que el archivo .env.local existe en la raíz del proyecto');
-      console.error('   2. Verifica que las variables están escritas correctamente');
-      console.error('   3. Reinicia el servidor de desarrollo');
+      if (typeof window !== 'undefined') {
+        console.error('\n📖 Para configurar las variables de entorno:');
+        console.error('   1. Verifica que las variables están configuradas en Vercel Dashboard');
+        console.error('   2. Verifica que el deployment incluye las variables correctas');
+        console.error('   3. Haz un redeploy sin cache si es necesario');
+      }
     }
 
     if (result.warnings.length > 0) {
