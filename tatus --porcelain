@@ -1,1 +1,6 @@
 [33m6d602ba[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m chore: initial commit
+[33m1f0a96b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Fix Farcaster Frame metadata and add API endpoint for frame interactions
+[33m013cb10[m Add comprehensive metadata, Open Graph tags, and Farcaster Frame metadata for mini app preview
+[33ma1c2321[m Fix MiniappSDK import and constructor issues with fallback methods
+[33m412195f[m Improve Farcaster SDK initialization with better environment detection and retry mechanisms
+[33m60a5b8c[m Fix Farcaster SDK initialization and ready() call to resolve splash screen issue
