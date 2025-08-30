@@ -5,7 +5,7 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const iconSizes = [512, 192, 144, 96, 72, 48];
+const iconSizes = [512, 192, 144, 96, 72, 48, 32, 16, 180];
 const sourceIcon = 'public/Pa$e a Gol-assets/icons/icon-1024.png.png';
 const outputDir = 'public/pase-a-gol-assets/icons';
 
