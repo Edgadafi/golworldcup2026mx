@@ -1,99 +1,94 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest) {
-  // Frame metadata para Farcaster
-  const frameMetadata = {
-    "fc:frame": "vNext",
-    "fc:frame:image": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/images/preview-1200x630.png.png",
-    "fc:frame:button:1": "⚽ ¡Pa$e a Gol!",
-    "fc:frame:button:2": "🎯 Ver Estadísticas",
-    "fc:frame:button:3": "🏆 Mundial 2026",
-    "fc:frame:button:4": "💰 Conectar Wallet",
-    "fc:frame:post_url": "https://flashsend-cdmx.vercel.app/api/frame",
-    "fc:frame:input:text": "Monto a transferir (MXN)",
-    "fc:frame:state": "pase-a-gol-cdmx-v1",
-    "fc:frame:aspect_ratio": "1.91:1"
-  };
-
-  // Retornar el frame metadata
-  return NextResponse.json(frameMetadata, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Cache-Control': 'no-cache, no-store, must-revalidate',
-      'Pragma': 'no-cache',
-      'Expires': '0'
-    }
-  });
-}
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    console.log('Frame interaction received:', body);
+    const { untrustedData, trustedData } = body;
 
-    // Procesar la interacción del frame
-    const { buttonIndex, inputText, state } = body;
+    // Obtener el mensaje del usuario si existe
+    const userMessage = untrustedData?.inputText || '';
 
-    let responseMessage = '';
-    let responseImage = '';
+    // Crear la respuesta del Frame
+    const frameResponse = {
+      frames: [
+        {
+          image: 'https://flashsend-cdmx.vercel.app/PaseaGol-assets/images/hero-1200x630.png',
+          buttons: [
+            {
+              label: '🎯 Pa$e Rápido',
+              action: 'post',
+            },
+            {
+              label: '👥 Pa$e Grupal',
+              action: 'post',
+            },
+            {
+              label: '📊 Mercado',
+              action: 'post',
+            },
+            {
+              label: '🏠 Inicio',
+              action: 'post',
+            },
+          ],
+          postUrl: 'https://flashsend-cdmx.vercel.app/api/frame',
+        },
+      ],
+    };
 
-    switch (buttonIndex) {
-      case 1: // ¡Pa$e a Gol!
-        responseMessage = '⚽ ¡Iniciando transferencia! Ingresa el monto y destinatario.';
-        responseImage = 'https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/images/preview-1200x630.png.png';
-        break;
-      case 2: // Ver Estadísticas
-        responseMessage = '🎯 Estadísticas del Mundial 2026: Pa$es completados: 127, Efectividad: 98%';
-        responseImage = 'https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/screenshots/screenshot-1-dashboard.png.png';
-        break;
-      case 3: // Mundial 2026
-        responseMessage = '🏆 Mundial 2026 en México: ¡La fiesta del fútbol está por comenzar!';
-        responseImage = 'https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/images/hero-1200x630.png.png';
-        break;
-      case 4: // Conectar Wallet
-        responseMessage = '💰 Conecta tu wallet para empezar a enviar dinero al instante.';
-        responseImage = 'https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/images/preview-1200x630.png.png';
-        break;
-      default:
-        responseMessage = '¡Bienvenido a Pa$e A Gol CDMX! Selecciona una opción para continuar.';
-        responseImage = 'https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/images/preview-1200x630.png.png';
+    // Si hay un mensaje del usuario, personalizar la respuesta
+    if (userMessage) {
+      frameResponse.frames[0].image = 'https://flashsend-cdmx.vercel.app/PaseaGol-assets/images/og-1200x630.png';
     }
 
-    // Crear respuesta del frame
-    const frameResponse = {
-      "fc:frame": "vNext",
-      "fc:frame:image": responseImage,
-      "fc:frame:button:1": "🏠 Volver al Inicio",
-      "fc:frame:button:2": "🔄 Otra Acción",
-      "fc:frame:post_url": "https://flashsend-cdmx.vercel.app/api/frame",
-      "fc:frame:state": "response-" + Date.now()
-    };
-
-    return NextResponse.json(frameResponse, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache, no-store, must-revalidate'
-      }
-    });
-
+    return NextResponse.json(frameResponse);
   } catch (error) {
-    console.error('Error processing frame interaction:', error);
+    console.error('Error en Frame API:', error);
     
-    // Respuesta de error
-    const errorResponse = {
-      "fc:frame": "vNext",
-      "fc:frame:image": "https://flashsend-cdmx.vercel.app/Pa$e%20a%20Gol-assets/images/preview-1200x630.png.png",
-      "fc:frame:button:1": "🔄 Reintentar",
-      "fc:frame:post_url": "https://flashsend-cdmx.vercel.app/api/frame",
-      "fc:frame:state": "error-" + Date.now()
-    };
-
-    return NextResponse.json(errorResponse, {
-      status: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache, no-store, must-revalidate'
-      }
+    // Respuesta de error por defecto
+    return NextResponse.json({
+      frames: [
+        {
+          image: 'https://flashsend-cdmx.vercel.app/PaseaGol-assets/images/hero-1200x630.png',
+          buttons: [
+            {
+              label: '🔄 Reintentar',
+              action: 'post',
+            },
+          ],
+          postUrl: 'https://flashsend-cdmx.vercel.app/api/frame',
+        },
+      ],
     });
   }
+}
+
+export async function GET() {
+  // Respuesta GET para mostrar el Frame inicial
+  return NextResponse.json({
+    frames: [
+      {
+        image: 'https://flashsend-cdmx.vercel.app/PaseaGol-assets/images/hero-1200x630.png',
+        buttons: [
+          {
+            label: '🎯 Pa$e Rápido',
+            action: 'post',
+          },
+          {
+            label: '👥 Pa$e Grupal',
+            action: 'post',
+          },
+          {
+            label: '📊 Mercado',
+            action: 'post',
+          },
+          {
+            label: '🏠 Inicio',
+            action: 'post',
+          },
+        ],
+        postUrl: 'https://flashsend-cdmx.vercel.app/api/frame',
+      },
+    ],
+  });
 }
