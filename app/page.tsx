@@ -19,10 +19,12 @@ export const metadata: Metadata = {
   other: {
     'fc:frame': 'vNext',
     'fc:frame:image': 'https://flashsend-cdmx.vercel.app/PaseaGol-assets/images/hero-1200x630.png',
-    'fc:frame:button:1': 'Jugar',
-    'fc:frame:button:1:action': 'post',
-    'fc:frame:button:1:target': 'https://flashsend-cdmx.vercel.app/api/frame',
+    'fc:frame:button:1': '🎯 Pa$e Rápido',
+    'fc:frame:button:2': '👥 Pa$e Grupal',
+    'fc:frame:button:3': '📊 Mercado',
+    'fc:frame:button:4': '🏠 Inicio',
     'fc:frame:post_url': 'https://flashsend-cdmx.vercel.app/api/frame',
+    'fc:frame:aspect_ratio': '1.91:1',
   },
 };
 
