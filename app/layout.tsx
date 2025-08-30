@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     siteName: 'Pa$e A Gol CDMX',
     images: [
       {
-        url: '/pase-a-gol-assets/images/og-1200x630.png',
+        url: '/PaseaGol-assets/images/og-1200x630.png',
         width: 1200,
         height: 630,
         alt: 'Pa$e A Gol CDMX',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Pa$e A Gol CDMX - Transforma cómo compartes dinero',
     description: 'Transforma cómo compartes dinero en CDMX. Conecta con tu comunidad, envía al instante y descubre el poder de una red financiera descentralizada.',
-    images: ['/pase-a-gol-assets/images/og-1200x630.png'],
+    images: ['/PaseaGol-assets/images/og-1200x630.png'],
   },
   manifest: '/manifest.json',
 };
@@ -45,7 +45,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#0F172A" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/pase-a-gol-assets/icons/icon-192.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/PaseaGol-assets/icons/icon-192.png" />
       </head>
       <body className={inter.className}>
         <Providers>
@@ -55,8 +55,3 @@ export default function RootLayout({
     </html>
   );
 }
-HTTP/2 200
-content-type: text/html; charset=utf-8
-...
-<meta name="fc:frame" content="vNext" />
-<meta name="fc:frame:image" content="https://flashsend-cdmx.vercel.app/splash.png" />
