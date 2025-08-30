@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlashSend CDMX - Pa$e a Gol ⚽💸</title>
+    <meta name="description" content="Cada pa$e es una jugada ganadora. Transforma cómo compartes dinero en CDMX.">
+    
+    <!-- Farcaster Meta Tags -->
+    <meta name="fc:miniapp" content='{"version":"1","imageUrl":"https://flashsend-cdmx.vercel.app/images/preview-1200x630.png","button":{"title":"Pa$e a Gol ⚽","action":{"type":"launch_frame","name":"FlashSend CDMX","url":"https://flashsend-cdmx.vercel.app/","splashImageUrl":"https://flashsend-cdmx.vercel.app/icons/splash-200.png","splashBackgroundColor":"#0F172A"}}}' />
+    
+    <!-- For backward compatibility -->
+    <meta name="fc:frame" content='{"version":"1","imageUrl":"https://flashsend-cdmx.vercel.app/images/preview-1200x630.png","button":{"title":"Pa$e a Gol ⚽","action":{"type":"launch_frame","name":"FlashSend CDMX","url":"https://flashsend-cdmx.vercel.app/","splashImageUrl":"https://flashsend-cdmx.vercel.app/icons/splash-200.png","splashBackgroundColor":"#0F172A"}}}' />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="FlashSend CDMX - Pa$e a Gol">
+    <meta property="og:description" content="Cada pa$e es una jugada ganadora ⚽💸">
+    <meta property="og:image" content="https://flashsend-cdmx.vercel.app/images/preview-1200x630.png">
+    <meta property="og:url" content="https://flashsend-cdmx.vercel.app">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FlashSend CDMX - Pa$e a Gol">
+    <meta name="twitter:description" content="Cada pa$e es una jugada ganadora ⚽💸">
+    <meta name="twitter:image" content="https://flashsend-cdmx.vercel.app/images/preview-1200x630.png">
+    
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="16x16">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+    
+    <!-- Theme -->
+    <meta name="theme-color" content="#00D4AA">
+    <meta name="msapplication-navbutton-color" content="#00D4AA">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #00D4AA 0%, #1E40AF 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #F59E0B;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .cta:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem 1rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .container {
+                margin: 1rem;
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FlashSend CDMX</h1>
+        <div class="tagline">Pa$e a Gol ⚽💸</div>
+        <div class="description">
+            Cada pa$e es una jugada ganadora. Transforma cómo compartes dinero en CDMX con la velocidad de un gol de último minuto.
+        </div>
+        
+        <a href="#" class="cta">🚀 Próximamente en Farcaster</a>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Instantáneo</div>
+                <div class="feature-desc">Pa$es en segundos</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🏆</div>
+                <div class="feature-title">Confiable</div>
+                <div class="feature-desc">Fair play siempre</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🇲🇽</div>
+                <div class="feature-title">100% Chilango</div>
+                <div class="feature-desc">Hecho para CDMX</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
