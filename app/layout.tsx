@@ -55,3 +55,8 @@ export default function RootLayout({
     </html>
   );
 }
+HTTP/2 200
+content-type: text/html; charset=utf-8
+...
+<meta name="fc:frame" content="vNext" />
+<meta name="fc:frame:image" content="https://flashsend-cdmx.vercel.app/splash.png" />
