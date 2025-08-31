@@ -12,21 +12,21 @@
   "categories": ["finance", "social", "utilities"],
   "icons": [
     {
-      "src": "/pase-a-gol-assets/icons/icon-192.png",
+      "src": "/PaseaGol-assets/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/pase-a-gol-assets/icons/icon-512.png",
-      "sizes": "512x512",
+      "src": "/PaseaGol-assets/icons/icon-1024.png",
+      "sizes": "1024x1024",
       "type": "image/png",
       "purpose": "any maskable"
     }
   ],
   "screenshots": [
     {
-      "src": "/pase-a-gol-assets/screenshots/screenshot-1-dashboard.png",
+      "src": "/PaseaGol-assets/screenshots/screenshot-1-dashboard.png",
       "sizes": "1200x630",
       "type": "image/png",
       "form_factor": "wide",
@@ -41,8 +41,8 @@
       "url": "/?action=rapido",
       "icons": [
         {
-          "src": "/pase-a-gol-assets/icons/icon-96.png",
-          "sizes": "96x96"
+          "src": "/PaseaGol-assets/icons/icon-192.png",
+          "sizes": "192x192"
         }
       ]
     }
