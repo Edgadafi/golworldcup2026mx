@@ -55,7 +55,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#0F172A" />
-        <link rel="manifest" href="/manifest.json" />
+                       <link rel="manifest" href="/manifest.json?v=2" />
         <link rel="icon" type="image/png" sizes="192x192" href="/PaseaGol-assets/icons/icon-192.png" />
         
         {/* Farcaster Frame Meta Tags - Directos en HTML */}
