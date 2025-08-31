@@ -6,20 +6,20 @@ import Providers from './providers';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Pa$e A Gol CDMX - Transforma cómo compartes dinero',
-  description: 'Transforma cómo compartes dinero en CDMX. Conecta con tu comunidad, envía al instante y descubre el poder de una red financiera descentralizada.',
+  title: 'FlashSend CDMX - Envía pagos rápidos y seguros',
+  description: 'Envía pagos rápidos y seguros',
   metadataBase: new URL('https://flashsend-cdmx.vercel.app'),
   openGraph: {
-    title: 'Pa$e A Gol CDMX - Transforma cómo compartes dinero',
-    description: 'Transforma cómo compartes dinero en CDMX. Conecta con tu comunidad, envía al instante y descubre el poder de una red financiera descentralizada.',
+    title: 'FlashSend CDMX',
+    description: 'Envía pagos rápidos y seguros',
     url: 'https://flashsend-cdmx.vercel.app',
-    siteName: 'Pa$e A Gol CDMX',
+    siteName: 'FlashSend CDMX',
     images: [
       {
-        url: '/PaseaGol-assets/images/og-1200x630.png',
+        url: '/preview-image.png',
         width: 1200,
         height: 630,
-        alt: 'Pa$e A Gol CDMX',
+        alt: 'FlashSend CDMX - Envía pagos rápidos y seguros',
       },
     ],
     locale: 'es_MX',
@@ -27,9 +27,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Pa$e A Gol CDMX - Transforma cómo compartes dinero',
-    description: 'Transforma cómo compartes dinero en CDMX. Conecta con tu comunidad, envía al instante y descubre el poder de una red financiera descentralizada.',
-    images: ['/PaseaGol-assets/images/og-1200x630.png'],
+    title: 'FlashSend CDMX',
+    description: 'Envía pagos rápidos y seguros',
+    images: ['/preview-image.png'],
   },
   manifest: '/manifest.json',
   other: {
@@ -41,6 +41,8 @@ export const metadata: Metadata = {
     'fc:frame:button:4': '🏠 Inicio',
     'fc:frame:post_url': 'https://flashsend-cdmx.vercel.app/api/frame',
     'fc:frame:aspect_ratio': '1.91:1',
+    // Farcaster Mini App meta tag
+    'fc:miniapp': '{"version":"1","image":"https://flashsend-cdmx.vercel.app/preview-image.png","button":{"text":"Abrir FlashSend"}}',
   },
 };
 
@@ -66,6 +68,17 @@ export default function RootLayout({
         <meta name="fc:frame:button:4" content="🏠 Inicio" />
         <meta name="fc:frame:post_url" content="https://flashsend-cdmx.vercel.app/api/frame" />
         <meta name="fc:frame:aspect_ratio" content="1.91:1" />
+        
+        {/* Farcaster Mini App Meta Tags */}
+        <meta property="fc:miniapp" content='{"version":"1","image":"https://flashsend-cdmx.vercel.app/preview-image.png","button":{"text":"Abrir FlashSend"}}' />
+        
+        {/* Open Graph Meta Tags adicionales para Mini App */}
+        <meta property="og:title" content="FlashSend CDMX" />
+        <meta property="og:description" content="Envía pagos rápidos y seguros" />
+        <meta property="og:image" content="https://flashsend-cdmx.vercel.app/preview-image.png" />
+        <meta property="og:url" content="https://flashsend-cdmx.vercel.app" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="FlashSend CDMX" />
       </head>
       <body className={inter.className}>
         <Providers>
