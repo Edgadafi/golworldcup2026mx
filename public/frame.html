@@ -3,21 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pa$e a Gol - CDMX</title>
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="¡Juega, predice y gana con pa$e a gol!" />
-    <meta property="og:description" content="La mejor plataforma para transferencias rápidas y predicciones deportivas" />
-    <meta property="og:image" content="https://flashsend-cdmx.vercel.app/PaseaGol-assets/images/hero-1200x630.png" />
-    <meta property="og:url" content="https://flashsend-cdmx.vercel.app" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Pa$e a Gol CDMX" />
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="¡Juega, predice y gana con pa$e a gol!" />
-    <meta name="twitter:description" content="La mejor plataforma para transferencias rápidas y predicciones deportivas" />
-    <meta name="twitter:image" content="https://flashsend-cdmx.vercel.app/PaseaGol-assets/images/hero-1200x630.png" />
+    <title>FlashSend CDMX - Farcaster Frame</title>
     
     <!-- Farcaster Frame Meta Tags -->
     <meta name="fc:frame" content="vNext" />
@@ -29,10 +15,22 @@
     <meta name="fc:frame:post_url" content="https://flashsend-cdmx.vercel.app/api/frame" />
     <meta name="fc:frame:aspect_ratio" content="1.91:1" />
     
-    <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#0F172A" />
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/PaseaGol-assets/icons/icon-192.png" />
+    <!-- Farcaster Mini App Meta Tag -->
+    <meta property="fc:miniapp" content='{"version":"1","image":"https://flashsend-cdmx.vercel.app/preview-image.png","button":{"text":"Abrir FlashSend"}}' />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="FlashSend CDMX" />
+    <meta property="og:description" content="Envía pagos rápidos y seguros" />
+    <meta property="og:image" content="https://flashsend-cdmx.vercel.app/preview-image.png" />
+    <meta property="og:url" content="https://flashsend-cdmx.vercel.app" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FlashSend CDMX" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="FlashSend CDMX" />
+    <meta name="twitter:description" content="Envía pagos rápidos y seguros" />
+    <meta name="twitter:image" content="https://flashsend-cdmx.vercel.app/preview-image.png" />
     
     <style>
         body {
@@ -46,99 +44,75 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
         }
-        
         .container {
+            text-align: center;
             max-width: 600px;
-            background: rgba(30, 41, 59, 0.8);
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        h1 {
+        .logo {
             font-size: 2.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #F59E0B, #EF4444);
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #3B82F6, #10B981);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
-        p {
+        .description {
             font-size: 1.2rem;
-            margin-bottom: 30px;
+            margin-bottom: 2rem;
             color: #CBD5E1;
-            line-height: 1.6;
         }
-        
-        .image-container {
-            margin: 30px 0;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-        
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-        
         .buttons {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 30px;
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
-        
         .button {
-            background: linear-gradient(45deg, #F59E0B, #EF4444);
+            background: linear-gradient(45deg, #3B82F6, #10B981);
             color: white;
-            padding: 15px 25px;
             border: none;
-            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            transition: transform 0.2s;
         }
-        
         .button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3);
         }
-        
-        .button.full-width {
-            grid-column: 1 / -1;
+        .footer {
+            margin-top: 2rem;
+            color: #64748B;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>¡Juega, predice y gana con pa$e a gol!</h1>
-        <p>La mejor plataforma para transferencias rápidas y predicciones deportivas durante la Copa Mundial 2026</p>
-        
-        <div class="image-container">
-            <img src="https://flashsend-cdmx.vercel.app/PaseaGol-assets/images/hero-1200x630.png" alt="Pa$e a Gol - Plataforma de Transferencias" />
-        </div>
+        <div class="logo">🚀 FlashSend CDMX</div>
+        <div class="description">Envía pagos rápidos y seguros en la Ciudad de México</div>
         
         <div class="buttons">
-            <a href="/" class="button">🎯 Pa$e Rápido</a>
-            <a href="/" class="button">👥 Pa$e Grupal</a>
-            <a href="/" class="button">📊 Mercado</a>
-            <a href="/" class="button">🏠 Inicio</a>
+            <button class="button" onclick="window.location.href='https://flashsend-cdmx.vercel.app/?action=rapido'">
+                🎯 Pa$e Rápido
+            </button>
+            <button class="button" onclick="window.location.href='https://flashsend-cdmx.vercel.app/?action=grupal'">
+                👥 Pa$e Grupal
+            </button>
+            <button class="button" onclick="window.location.href='https://flashsend-cdmx.vercel.app/?action=mercado'">
+                📊 Mercado
+            </button>
+            <button class="button" onclick="window.location.href='https://flashsend-cdmx.vercel.app/'">
+                🏠 Inicio
+            </button>
         </div>
         
-        <p style="margin-top: 40px; font-size: 1rem; color: #94A3B8;">
-            Conecta con tu comunidad, envía al instante y descubre el poder de una red financiera descentralizada
-        </p>
+        <div class="footer">
+            Powered by Farcaster • Built with Next.js
+        </div>
     </div>
 </body>
 </html>
