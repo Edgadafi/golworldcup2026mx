@@ -6,142 +6,39 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { OnchainKitProvider } from '@coinbase/onchainkit';
 import { base } from 'viem/chains';
 import { wagmiConfig } from '../lib/wagmi';
-import { config, validateConfig, type ConfigValidationResult } from '../lib/config';
 
 export default function Providers({ children }: PropsWithChildren) {
   const [queryClient] = useState(() => new QueryClient());
-  const [configResult, setConfigResult] = useState<ConfigValidationResult | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    try {
-      // Validar configuración al montar el componente
-      const result = validateConfig();
-      setConfigResult(result);
-      
-      if (!result.isValid) {
-        console.error('🚨 Configuración inválida detectada');
-        // En producción, intentar usar valores por defecto
-        if (process.env.NODE_ENV === 'production') {
-          console.log('🔄 Modo producción: usando configuración por defecto');
-          setConfigResult({
-            isValid: true,
-            errors: [],
-            warnings: ['Usando configuración por defecto en producción'],
-            details: {
-              onchainKit: true,
-              walletConnect: false,
-              chain: true,
-              app: true,
-            }
-          });
-        }
-      }
-    } catch (error) {
-      console.error('❌ Error al validar la configuración:', error);
-      // En producción, continuar con valores por defecto
-      if (process.env.NODE_ENV === 'production') {
-        console.log('🔄 Modo producción: continuando con configuración por defecto');
-        setConfigResult({
-          isValid: true,
-          errors: [],
-          warnings: ['Error en validación, usando configuración por defecto'],
-          details: {
-            onchainKit: true,
-            walletConnect: false,
-            chain: true,
-            app: true,
-          }
-        });
-      } else {
-        setConfigResult({
-          isValid: false,
-          errors: [`Error interno: ${error instanceof Error ? error.message : 'Error desconocido'}`],
-          warnings: [],
-          details: {
-            onchainKit: false,
-            walletConnect: false,
-            chain: false,
-            app: false,
-          }
-        });
-      }
-    } finally {
+    // Simular un pequeño delay para mostrar el loading
+    const timer = setTimeout(() => {
       setIsLoading(false);
-    }
+    }, 1000);
+
+    return () => clearTimeout(timer);
   }, []);
 
-  // Mostrar loading mientras se valida
+  // Mostrar loading mientras se inicializa
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-blue-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-lg p-6 max-w-md">
-          <div className="text-blue-600 text-center">
-            <h2 className="text-xl font-bold mb-4">🔄 Validando Configuración</h2>
-            <p className="mb-4">
-              Verificando variables de entorno...
-            </p>
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Mostrar error si la configuración no es válida (solo en desarrollo)
-  if (!configResult?.isValid && process.env.NODE_ENV === 'development') {
-    return (
-      <div className="min-h-screen bg-red-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-lg p-6 max-w-md">
-          <div className="text-red-600 text-center">
-            <h2 className="text-xl font-bold mb-4">⚠️ Configuración Requerida</h2>
-            <p className="mb-4">
-              La aplicación necesita variables de entorno para funcionar correctamente.
-            </p>
-            
-            {configResult?.errors && configResult.errors.length > 0 && (
-              <div className="text-left text-sm bg-red-100 p-3 rounded mb-4">
-                <p className="font-semibold mb-2 text-red-800">Errores encontrados:</p>
-                <ul className="list-disc list-inside space-y-1 text-red-700">
-                  {configResult.errors.map((error, index) => (
-                    <li key={index}>{error}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {configResult?.warnings && configResult.warnings.length > 0 && (
-              <div className="text-left text-sm bg-yellow-100 p-3 rounded mb-4">
-                <p className="font-semibold mb-2 text-yellow-800">Advertencias:</p>
-                <ul className="list-disc list-inside space-y-1 text-yellow-700">
-                  {configResult.warnings.map((warning, index) => (
-                    <li key={index}>{warning}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            <div className="text-left text-sm bg-gray-100 p-3 rounded">
-              <p className="font-semibold mb-2">Variables requeridas:</p>
-              <ul className="list-disc list-inside space-y-1">
-                <li><code>NEXT_PUBLIC_ONCHAINKIT_API_KEY</code></li>
-              </ul>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+        <div className="bg-white rounded-xl shadow-xl p-8 max-w-md text-center">
+          <div className="text-blue-600">
+            <div className="w-16 h-16 mx-auto mb-4">
+              <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-200 border-t-blue-600"></div>
             </div>
-            
-            <p className="mt-4 text-xs text-gray-600">
-              Verifica tu archivo <code>.env.local</code> en la raíz del proyecto
-            </p>
+            <h2 className="text-2xl font-bold mb-2">🚀 Inicializando</h2>
+            <p className="text-gray-600">Preparando Pa$e a Gol...</p>
           </div>
         </div>
       </div>
     );
   }
 
-  // Configuración válida o modo producción, renderizar la aplicación
-  console.log('🎉 Configuración validada, renderizando aplicación...');
-  
-  // En producción, usar valores por defecto si no hay API key
-  const apiKey = config.onchainKit.apiKey || 'dCYkTdedsxBb9dGjUgAjtU47LEftQrfp';
+  // Usar API key por defecto en producción si no hay una configurada
+  const apiKey = process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY || 'dCYkTdedsxBb9dGjUgAjtU47LEftQrfp';
   
   return (
     <WagmiProvider config={wagmiConfig}>
