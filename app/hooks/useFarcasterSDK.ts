@@ -2,15 +2,10 @@
 
 import { useState, useEffect, useCallback } from 'react';
 
-// Tipos para el SDK de Farcaster
-interface FarcasterSDK {
-  ready: () => Promise<void>;
-  isReady: () => Promise<boolean>;
-  getFrame: () => any;
-  getCast: () => any;
-  getUser: () => any;
-}
+// Importar la nueva SDK de Farcaster Mini App
+import { FarcasterMiniAppSDK } from '@farcaster/miniapp-sdk';
 
+// Tipos para el SDK de Farcaster Mini App
 interface FarcasterUser {
   fid: number;
   username: string;
@@ -21,7 +16,7 @@ interface FarcasterUser {
 }
 
 export function useFarcasterSDK() {
-  const [sdk, setSdk] = useState<FarcasterSDK | null>(null);
+  const [sdk, setSdk] = useState<FarcasterMiniAppSDK | null>(null);
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isFarcasterEnv, setIsFarcasterEnv] = useState(false);
@@ -60,40 +55,40 @@ export function useFarcasterSDK() {
   useEffect(() => {
     const initializeSDK = async () => {
       try {
-        // En un entorno real de Farcaster, aquí cargarías el SDK
-        // Por ahora, simulamos la funcionalidad básica
         if (isFarcasterEnv) {
-          console.log('🚀 Inicializando SDK de Farcaster...');
+          console.log('🚀 Inicializando Farcaster Mini App SDK...');
           
-          // Simular SDK de Farcaster
-          const mockSDK: FarcasterSDK = {
-            ready: async () => {
-              console.log('✅ SDK de Farcaster listo');
-              setIsReady(true);
-            },
-            isReady: async () => isReady,
-            getFrame: () => ({ id: 'mock-frame-id' }),
-            getCast: () => ({ hash: 'mock-cast-hash' }),
-            getUser: () => user,
-          };
-          
-          setSdk(mockSDK);
-          
-          // Simular usuario de Farcaster
-          setUser({
-            fid: 12345,
-            username: 'paseagol_cdmx',
-            displayName: 'Pa$e A Gol CDMX',
-            pfp: '/pase-a-gol-assets/icons/icon-1024.png.png',
-            followerCount: 1000,
-            followingCount: 500,
+          // Crear instancia del SDK
+          const miniAppSDK = new FarcasterMiniAppSDK({
+            appName: 'Pa$e a GoI CDMX',
+            appVersion: '1.0.0',
+            appIcon: 'https://flashsend-cdmx.vercel.app/icon.png',
           });
           
-          // Marcar como listo después de un breve delay
-          setTimeout(() => {
-            setIsReady(true);
-            console.log('🎉 SDK de Farcaster inicializado correctamente');
-          }, 1000);
+          setSdk(miniAppSDK);
+          
+          // Inicializar el SDK
+          await miniAppSDK.ready();
+          setIsReady(true);
+          
+          console.log('🎉 Farcaster Mini App SDK inicializado correctamente');
+          
+          // Obtener información del usuario si está disponible
+          try {
+            const userInfo = await miniAppSDK.getUser();
+            if (userInfo) {
+              setUser({
+                fid: userInfo.fid || 0,
+                username: userInfo.username || 'usuario',
+                displayName: userInfo.displayName || 'Usuario',
+                pfp: userInfo.pfp || '/pase-a-gol-assets/icons/icon-1024.png',
+                followerCount: userInfo.followerCount || 0,
+                followingCount: userInfo.followingCount || 0,
+              });
+            }
+          } catch (userError) {
+            console.warn('⚠️ No se pudo obtener información del usuario:', userError);
+          }
           
         } else {
           // En entorno web estándar, marcar como listo inmediatamente
@@ -102,7 +97,7 @@ export function useFarcasterSDK() {
         }
         
       } catch (error) {
-        console.error('❌ Error al inicializar SDK de Farcaster:', error);
+        console.error('❌ Error al inicializar Farcaster Mini App SDK:', error);
         setError(`Error de inicialización: ${error instanceof Error ? error.message : 'Error desconocido'}`);
         
         // En caso de error, marcar como listo para no bloquear la app
@@ -161,6 +156,30 @@ export function useFarcasterSDK() {
     }
   }, [sdk, isReady]);
 
+  // Función para enviar mensajes al frame padre
+  const sendMessage = useCallback(async (message: any) => {
+    try {
+      if (sdk && isReady) {
+        await sdk.sendMessage(message);
+        console.log('📤 Mensaje enviado al frame padre:', message);
+      }
+    } catch (error) {
+      console.error('❌ Error al enviar mensaje:', error);
+    }
+  }, [sdk, isReady]);
+
+  // Función para cerrar el Mini App
+  const closeMiniApp = useCallback(async () => {
+    try {
+      if (sdk && isReady) {
+        await sdk.close();
+        console.log('🔒 Mini App cerrado');
+      }
+    } catch (error) {
+      console.error('❌ Error al cerrar Mini App:', error);
+    }
+  }, [sdk, isReady]);
+
   return {
     sdk,
     isReady,
@@ -170,5 +189,7 @@ export function useFarcasterSDK() {
     callReady,
     getUserInfo,
     getFrameInfo,
+    sendMessage,
+    closeMiniApp,
   };
 }
