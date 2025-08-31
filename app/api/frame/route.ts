@@ -41,88 +41,109 @@ export async function POST(request: NextRequest) {
         responseDescription = '¡Juega, predice y gana con pa$e a gol!';
     }
 
-    // Crear la respuesta del Frame
-    const frameResponse = {
-      frames: [
-        {
-          image: responseImage,
-          title: responseTitle,
-          description: responseDescription,
-          buttons: [
-            {
-              label: '🎯 Pa$e Rápido',
-              action: 'post',
-            },
-            {
-              label: '👥 Pa$e Grupal',
-              action: 'post',
-            },
-            {
-              label: '📊 Mercado',
-              action: 'post',
-            },
-            {
-              label: '🏠 Inicio',
-              action: 'post',
-            },
-          ],
-          postUrl: 'https://flashsend-cdmx.vercel.app/api/frame',
-        },
-      ],
-    };
+    // Crear HTML con meta tags de Farcaster Frame
+    const htmlResponse = `
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${responseTitle}</title>
+    <meta property="og:title" content="${responseTitle}" />
+    <meta property="og:description" content="${responseDescription}" />
+    <meta property="og:image" content="${responseImage}" />
+    
+    <!-- Farcaster Frame Meta Tags -->
+    <meta name="fc:frame" content="vNext" />
+    <meta name="fc:frame:image" content="${responseImage}" />
+    <meta name="fc:frame:button:1" content="🎯 Pa$e Rápido" />
+    <meta name="fc:frame:button:2" content="👥 Pa$e Grupal" />
+    <meta name="fc:frame:button:3" content="📊 Mercado" />
+    <meta name="fc:frame:button:4" content="🏠 Inicio" />
+    <meta name="fc:frame:post_url" content="https://flashsend-cdmx.vercel.app/api/frame" />
+    <meta name="fc:frame:aspect_ratio" content="1.91:1" />
+</head>
+<body>
+    <h1>${responseTitle}</h1>
+    <p>${responseDescription}</p>
+    <img src="${responseImage}" alt="${responseTitle}" style="max-width: 100%; height: auto;" />
+</body>
+</html>`;
 
-    return NextResponse.json(frameResponse);
+    return new NextResponse(htmlResponse, {
+      headers: {
+        'Content-Type': 'text/html',
+      },
+    });
   } catch (error) {
     console.error('Error en Frame API:', error);
     
     // Respuesta de error por defecto
-    return NextResponse.json({
-      frames: [
-        {
-          image: 'https://flashsend-cdmx.vercel.app/PaseaGol-assets/images/hero-1200x630.png',
-          title: 'Pa$e a Gol - CDMX',
-          description: '¡Juega, predice y gana con pa$e a gol!',
-          buttons: [
-            {
-              label: '🔄 Reintentar',
-              action: 'post',
-            },
-          ],
-          postUrl: 'https://flashsend-cdmx.vercel.app/api/frame',
-        },
-      ],
+    const errorHtml = `
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Pa$e a Gol</title>
+    <meta property="og:title" content="Error - Pa$e a Gol" />
+    <meta property="og:description" content="Ha ocurrido un error. Por favor, intenta de nuevo." />
+    <meta property="og:image" content="https://flashsend-cdmx.vercel.app/PaseaGol-assets/images/hero-1200x630.png" />
+    
+    <!-- Farcaster Frame Meta Tags -->
+    <meta name="fc:frame" content="vNext" />
+    <meta name="fc:frame:image" content="https://flashsend-cdmx.vercel.app/PaseaGol-assets/images/hero-1200x630.png" />
+    <meta name="fc:frame:button:1" content="🔄 Reintentar" />
+    <meta name="fc:frame:post_url" content="https://flashsend-cdmx.vercel.app/api/frame" />
+    <meta name="fc:frame:aspect_ratio" content="1.91:1" />
+</head>
+<body>
+    <h1>Error - Pa$e a Gol</h1>
+    <p>Ha ocurrido un error. Por favor, intenta de nuevo.</p>
+</body>
+</html>`;
+
+    return new NextResponse(errorHtml, {
+      headers: {
+        'Content-Type': 'text/html',
+      },
     });
   }
 }
 
 export async function GET() {
   // Respuesta GET para mostrar el Frame inicial
-  return NextResponse.json({
-    frames: [
-      {
-        image: 'https://flashsend-cdmx.vercel.app/PaseaGol-assets/images/hero-1200x630.png',
-        title: 'Pa$e a Gol - CDMX',
-        description: '¡Juega, predice y gana con pa$e a gol!',
-        buttons: [
-          {
-            label: '🎯 Pa$e Rápido',
-            action: 'post',
-          },
-          {
-            label: '👥 Pa$e Grupal',
-            action: 'post',
-          },
-          {
-            label: '📊 Mercado',
-            action: 'post',
-          },
-          {
-            label: '🏠 Inicio',
-            action: 'post',
-          },
-        ],
-        postUrl: 'https://flashsend-cdmx.vercel.app/api/frame',
-      },
-    ],
+  const htmlResponse = `
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pa$e a Gol - CDMX</title>
+    <meta property="og:title" content="¡Juega, predice y gana con pa$e a gol!" />
+    <meta property="og:description" content="La mejor plataforma para transferencias rápidas y predicciones deportivas" />
+    <meta property="og:image" content="https://flashsend-cdmx.vercel.app/PaseaGol-assets/images/hero-1200x630.png" />
+    
+    <!-- Farcaster Frame Meta Tags -->
+    <meta name="fc:frame" content="vNext" />
+    <meta name="fc:frame:image" content="https://flashsend-cdmx.vercel.app/PaseaGol-assets/images/hero-1200x630.png" />
+    <meta name="fc:frame:button:1" content="🎯 Pa$e Rápido" />
+    <meta name="fc:frame:button:2" content="👥 Pa$e Grupal" />
+    <meta name="fc:frame:button:3" content="📊 Mercado" />
+    <meta name="fc:frame:button:4" content="🏠 Inicio" />
+    <meta name="fc:frame:post_url" content="https://flashsend-cdmx.vercel.app/api/frame" />
+    <meta name="fc:frame:aspect_ratio" content="1.91:1" />
+</head>
+<body>
+    <h1>¡Juega, predice y gana con pa$e a gol!</h1>
+    <p>La mejor plataforma para transferencias rápidas y predicciones deportivas</p>
+    <img src="https://flashsend-cdmx.vercel.app/PaseaGol-assets/images/hero-1200x630.png" alt="Pa$e a Gol" style="max-width: 100%; height: auto;" />
+</body>
+</html>`;
+
+  return new NextResponse(htmlResponse, {
+    headers: {
+      'Content-Type': 'text/html',
+    },
   });
 }

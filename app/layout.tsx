@@ -32,6 +32,16 @@ export const metadata: Metadata = {
     images: ['/PaseaGol-assets/images/og-1200x630.png'],
   },
   manifest: '/manifest.json',
+  other: {
+    'fc:frame': 'vNext',
+    'fc:frame:image': 'https://flashsend-cdmx.vercel.app/PaseaGol-assets/images/hero-1200x630.png',
+    'fc:frame:button:1': '🎯 Pa$e Rápido',
+    'fc:frame:button:2': '👥 Pa$e Grupal',
+    'fc:frame:button:3': '📊 Mercado',
+    'fc:frame:button:4': '🏠 Inicio',
+    'fc:frame:post_url': 'https://flashsend-cdmx.vercel.app/api/frame',
+    'fc:frame:aspect_ratio': '1.91:1',
+  },
 };
 
 export default function RootLayout({
@@ -46,6 +56,16 @@ export default function RootLayout({
         <meta name="theme-color" content="#0F172A" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" type="image/png" sizes="192x192" href="/PaseaGol-assets/icons/icon-192.png" />
+        
+        {/* Farcaster Frame Meta Tags */}
+        <meta name="fc:frame" content="vNext" />
+        <meta name="fc:frame:image" content="https://flashsend-cdmx.vercel.app/PaseaGol-assets/images/hero-1200x630.png" />
+        <meta name="fc:frame:button:1" content="🎯 Pa$e Rápido" />
+        <meta name="fc:frame:button:2" content="👥 Pa$e Grupal" />
+        <meta name="fc:frame:button:3" content="📊 Mercado" />
+        <meta name="fc:frame:button:4" content="🏠 Inicio" />
+        <meta name="fc:frame:post_url" content="https://flashsend-cdmx.vercel.app/api/frame" />
+        <meta name="fc:frame:aspect_ratio" content="1.91:1" />
       </head>
       <body className={inter.className}>
         <Providers>
