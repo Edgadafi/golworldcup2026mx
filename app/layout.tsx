@@ -41,7 +41,6 @@ export const metadata: Metadata = {
     'fc:frame:button:4': '🏠 Inicio',
     'fc:frame:post_url': 'https://flashsend-cdmx.vercel.app/api/frame',
     'fc:frame:aspect_ratio': '1.91:1',
-    // Farcaster Mini App meta tag
     'fc:miniapp': '{"version":"1","image":"https://flashsend-cdmx.vercel.app/preview-image.png","button":{"text":"Abrir FlashSend"}}',
   },
 };
@@ -59,7 +58,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" type="image/png" sizes="192x192" href="/PaseaGol-assets/icons/icon-192.png" />
         
-        {/* Farcaster Frame Meta Tags */}
+        {/* Farcaster Frame Meta Tags - Directos en HTML */}
         <meta name="fc:frame" content="vNext" />
         <meta name="fc:frame:image" content="https://flashsend-cdmx.vercel.app/PaseaGol-assets/images/hero-1200x630.png" />
         <meta name="fc:frame:button:1" content="🎯 Pa$e Rápido" />
@@ -69,16 +68,22 @@ export default function RootLayout({
         <meta name="fc:frame:post_url" content="https://flashsend-cdmx.vercel.app/api/frame" />
         <meta name="fc:frame:aspect_ratio" content="1.91:1" />
         
-        {/* Farcaster Mini App Meta Tags */}
+        {/* Farcaster Mini App Meta Tag - Directo en HTML */}
         <meta property="fc:miniapp" content='{"version":"1","image":"https://flashsend-cdmx.vercel.app/preview-image.png","button":{"text":"Abrir FlashSend"}}' />
         
-        {/* Open Graph Meta Tags adicionales para Mini App */}
+        {/* Open Graph Meta Tags - Directos en HTML */}
         <meta property="og:title" content="FlashSend CDMX" />
         <meta property="og:description" content="Envía pagos rápidos y seguros" />
         <meta property="og:image" content="https://flashsend-cdmx.vercel.app/preview-image.png" />
         <meta property="og:url" content="https://flashsend-cdmx.vercel.app" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="FlashSend CDMX" />
+        
+        {/* Twitter Card Meta Tags - Directos en HTML */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="FlashSend CDMX" />
+        <meta name="twitter:description" content="Envía pagos rápidos y seguros" />
+        <meta name="twitter:image" content="https://flashsend-cdmx.vercel.app/preview-image.png" />
       </head>
       <body className={inter.className}>
         <Providers>
