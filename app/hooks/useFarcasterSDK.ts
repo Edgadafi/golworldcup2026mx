@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 
 // Importar la nueva SDK de Farcaster Mini App
-import { MiniAppSDK } from '@farcaster/miniapp-sdk';
+import MiniAppSDK from '@farcaster/miniapp-sdk';
 
 // Tipos para el SDK de Farcaster Mini App
 interface FarcasterUser {
@@ -16,7 +16,7 @@ interface FarcasterUser {
 }
 
 export function useFarcasterSDK() {
-  const [sdk, setSdk] = useState<MiniAppSDK | null>(null);
+  const [sdk, setSdk] = useState<typeof MiniAppSDK | null>(null);
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isFarcasterEnv, setIsFarcasterEnv] = useState(false);
@@ -59,7 +59,7 @@ export function useFarcasterSDK() {
           console.log('🚀 Inicializando Farcaster Mini App SDK...');
           
           // Crear instancia del SDK
-          const miniAppSDK = new MiniAppSDK({
+          const miniAppSDK = new (MiniAppSDK as any)({
             appName: 'Pa$e a GoI CDMX',
             appVersion: '1.0.0',
             appIcon: 'https://flashsend-cdmx.vercel.app/icon.png',

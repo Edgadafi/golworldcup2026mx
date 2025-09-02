@@ -105,78 +105,58 @@ export default function HomePageClient() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-green-100">
-      {/* Header */}
-      <header className="relative bg-gradient-to-r from-green-600 to-blue-600 text-white py-8 px-6 shadow-lg">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-6">
-            {/* Logo y título */}
-            <div className="flex items-center space-x-4">
-              <motion.h1 
-                className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-yellow-300 to-white bg-clip-text text-transparent"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                Pa$e a Gol
-              </motion.h1>
-              
-              {/* Emoji ⚽ rotativo */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                className="text-4xl"
-              >
-                ⚽
-              </motion.div>
-            </div>
-
-            {/* Controles de sonido y bandera */}
-            <div className="flex items-center space-x-4">
-              <div className="text-sm text-center">
-                <p className="font-semibold">Sonido</p>
-                <p className="text-yellow-200">🔊 ON</p>
-              </div>
-              <MexicanFlag />
-            </div>
+    <div className="min-h-screen bg-white">
+      {/* Header - Optimizado para móvil */}
+      <header className="bg-gradient-to-r from-green-600 to-blue-600 text-white py-4 px-4 shadow-lg">
+        <div className="w-full">
+          {/* Logo y título centrado */}
+          <div className="flex flex-col items-center mb-4">
+            <motion.h1 
+              className="text-3xl font-bold text-white text-center mb-2"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              Pa$e a Gol ⚽
+            </motion.h1>
+            
+            {/* Contador de días al Mundial */}
+            <motion.div 
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <p className="text-sm text-yellow-200">
+                🏆 Mundial 2026 en {daysToWorldCup} días
+              </p>
+            </motion.div>
           </div>
 
-          {/* World Cup Badge */}
+          {/* World Cup Badge centrado */}
           <div className="flex justify-center">
             <WorldCupBadge />
           </div>
-
-          {/* Contador de días al Mundial */}
-          <motion.div 
-            className="text-center mt-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-          >
-            <p className="text-lg text-yellow-200">
-              🏆 Mundial 2026 en {daysToWorldCup} días
-            </p>
-          </motion.div>
         </div>
       </header>
 
-      {/* Contenido principal */}
-      <main className="max-w-7xl mx-auto px-6 py-8">
+      {/* Contenido principal - Optimizado para móvil */}
+      <main className="w-full px-4 py-6">
         {/* Sección de Estadísticas */}
-        <section className="mb-12">
+        <section className="mb-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-center mb-8"
+            className="text-center mb-6"
           >
-            <h2 className="text-3xl font-bold text-gray-800 mb-2">
-              🏆 Tu Desempeño en la Cancha
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">
+              🏆 Tu Desempeño
             </h2>
-            <p className="text-gray-600">Estadísticas de tus transferencias</p>
+            <p className="text-gray-600 text-sm">Estadísticas de transferencias</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 gap-3">
             {mockStats.map((stat, index) => (
               <StatsCard
                 key={stat.title}
@@ -187,46 +167,46 @@ export default function HomePageClient() {
           </div>
         </section>
 
-        {/* Acciones Rápidas */}
-        <section className="mb-12">
+        {/* Acciones Rápidas - Optimizado para móvil */}
+        <section className="mb-8">
           <motion.h3
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="text-3xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent mb-8 text-center"
+            className="text-2xl font-bold text-gray-800 mb-6 text-center"
           >
             🚀 Acciones Rápidas
           </motion.h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 gap-4">
             {[
               { 
                 icon: '🚀', 
                 title: 'Pa$e Rápido', 
                 description: 'Transferencia instantánea',
-                gradient: 'from-green-400 to-emerald-500',
-                hoverGradient: 'from-green-500 to-emerald-600'
+                bgColor: 'bg-green-500',
+                hoverColor: 'bg-green-600'
               },
               { 
                 icon: '👥', 
                 title: 'Pa$e Grupal', 
-                description: 'Enviar a múltiples usuarios',
-                gradient: 'from-blue-400 to-cyan-500',
-                hoverGradient: 'from-blue-500 to-cyan-600'
+                description: 'Enviar a múltiples',
+                bgColor: 'bg-blue-500',
+                hoverColor: 'bg-blue-600'
               },
               { 
                 icon: '🎁', 
                 title: 'Propina', 
-                description: 'Dar propina fácilmente',
-                gradient: 'from-purple-400 to-pink-500',
-                hoverGradient: 'from-purple-500 to-pink-600'
+                description: 'Dar propina',
+                bgColor: 'bg-purple-500',
+                hoverColor: 'bg-purple-600'
               },
               { 
                 icon: '📊', 
                 title: 'Mercado', 
-                description: 'Predicciones deportivas',
-                gradient: 'from-orange-400 to-red-500',
-                hoverGradient: 'from-orange-500 to-red-600'
+                description: 'Predicciones',
+                bgColor: 'bg-orange-500',
+                hoverColor: 'bg-orange-600'
               }
             ].map((action, index) => (
               <motion.div
@@ -234,74 +214,67 @@ export default function HomePageClient() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 + index * 0.1 }}
-                whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
-                className="group"
+                className="w-full"
               >
                 <Card 
-                  className="p-8 text-center cursor-pointer transition-all duration-300 bg-white border-0 shadow-lg hover:shadow-2xl overflow-hidden relative"
+                  className="p-4 text-center cursor-pointer transition-all duration-200 bg-white border-2 border-gray-200 shadow-md active:shadow-lg"
                   onClick={() => handleQuickAction(action.title)}
                 >
-                  {/* Background gradient overlay */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${action.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
-                  
-                  {/* Icon with background */}
-                  <div className={`relative z-10 w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br ${action.gradient} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300`}>
-                    <span className="text-3xl">{action.icon}</span>
+                  {/* Icon with solid background */}
+                  <div className={`w-12 h-12 mx-auto mb-3 rounded-full ${action.bgColor} flex items-center justify-center shadow-sm`}>
+                    <span className="text-xl text-white">{action.icon}</span>
                   </div>
                   
                   {/* Content */}
-                  <div className="relative z-10">
-                    <h4 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-gray-900 transition-colors">
+                  <div>
+                    <h4 className="text-sm font-bold text-gray-800 mb-1">
                       {action.title}
                     </h4>
-                    <p className="text-gray-600 group-hover:text-gray-700 transition-colors">
+                    <p className="text-xs text-gray-600">
                       {action.description}
                     </p>
                   </div>
-                  
-                  {/* Hover effect border */}
-                  <div className={`absolute inset-0 rounded-lg border-2 border-transparent group-hover:border-current group-hover:${action.hoverGradient} transition-all duration-300 opacity-0 group-hover:opacity-20`} />
                 </Card>
               </motion.div>
             ))}
           </div>
         </section>
 
-        {/* Actividad Reciente */}
-        <section className="mb-12">
+        {/* Actividad Reciente - Optimizado para móvil */}
+        <section className="mb-8">
           <motion.h3
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
-            className="text-2xl font-bold text-gray-800 mb-6 text-center"
+            className="text-xl font-bold text-gray-800 mb-4 text-center"
           >
             📊 Actividad Reciente
           </motion.h3>
 
-          <Card className="p-6 bg-white">
-            <div className="space-y-4">
-              {mockTransactions.map((transaction, index) => (
+          <Card className="p-4 bg-white border border-gray-200">
+            <div className="space-y-3">
+              {mockTransactions.slice(0, 3).map((transaction, index) => (
                 <motion.div
                   key={transaction.id}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.9 + index * 0.1 }}
-                  className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                  className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
                 >
-                  <div className="flex items-center space-x-3">
-                    <span className="text-2xl">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-lg">
                       {transaction.type === 'success' ? '✅' : '⏳'}
                     </span>
                     <div>
-                      <p className="font-semibold text-gray-800">
-                        ¡GOL! Pa$e a {transaction.user}
+                      <p className="font-semibold text-gray-800 text-sm">
+                        {transaction.user}
                       </p>
-                      <p className="text-sm text-gray-600">{transaction.message}</p>
+                      <p className="text-xs text-gray-600">{transaction.message}</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-bold text-green-600">{transaction.amount}</p>
+                    <p className="font-bold text-green-600 text-sm">{transaction.amount}</p>
                     <p className="text-xs text-gray-500">{transaction.time}</p>
                   </div>
                 </motion.div>
@@ -311,9 +284,9 @@ export default function HomePageClient() {
         </section>
       </main>
 
-      {/* FAB - Floating Action Button */}
+      {/* FAB - Floating Action Button - Optimizado para móvil */}
       <motion.div
-        className="fixed bottom-6 right-6 z-40"
+        className="fixed bottom-4 right-4 z-40"
         initial={{ scale: 0, rotate: -180 }}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ 
@@ -322,14 +295,13 @@ export default function HomePageClient() {
           stiffness: 200,
           delay: 1 
         }}
-        whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
         <Button
           onClick={() => setIsTransferModalOpen(true)}
-          className="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white shadow-lg hover:shadow-xl transition-all duration-200"
+          className="w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg active:shadow-xl transition-all duration-200"
         >
-          <span className="text-2xl">📤</span>
+          <span className="text-xl">📤</span>
         </Button>
       </motion.div>
 
